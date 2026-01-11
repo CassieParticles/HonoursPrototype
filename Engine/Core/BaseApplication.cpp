@@ -1,8 +1,8 @@
-﻿#include "Application.h"
+﻿#include "BaseApplication.h"
 
 #include "Timer.h"
 
-Application::Application():window{sf::VideoMode({800,800}),"SFML Window"},input(&window)
+BaseApplication::BaseApplication():window{sf::VideoMode({800,800}),"SFML Window"},input(&window)
 {
     clearColour = sf::Color::Cyan;
 
@@ -15,12 +15,12 @@ Application::Application():window{sf::VideoMode({800,800}),"SFML Window"},input(
     Timer::Init();
 }
 
-Application::~Application()
+BaseApplication::~BaseApplication()
 {
 
 }
 
-void Application::Gameloop()
+void BaseApplication::Gameloop()
 {
     while(window.isOpen())
     {
@@ -33,22 +33,22 @@ void Application::Gameloop()
     }
 }
 
-void Application::PollEvents()
+void BaseApplication::PollEvents()
 {
     input.PollEvents();
 }
 
 
-void Application::Input()
+void BaseApplication::Input()
 {
 
 }
 
 
-void Application::Update() {}
+void BaseApplication::Update() {}
 
 
-void Application::Render()
+void BaseApplication::Render()
 {
     window.clear(clearColour);
     window.setView(camera.getView());

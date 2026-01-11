@@ -4,18 +4,18 @@
 #include "InputHandler.h"
 #include "../Rendering/Camera.h"
 
-class Application
+class BaseApplication
 {
 public:
-    Application();
-    ~Application();
+    BaseApplication();
+    virtual ~BaseApplication();
 
     void Gameloop();
 private:
-    void PollEvents();
-    void Input();
-    void Update();
-    void Render();
+    virtual void PollEvents();
+    virtual void Input();
+    virtual void Update();
+    virtual void Render();
 
     //Systems
     sf::RenderWindow window;

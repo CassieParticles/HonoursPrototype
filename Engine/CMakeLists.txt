@@ -1,8 +1,8 @@
 ﻿cmake_minimum_required(VERSION 4.1)
 
 add_library(HonoursFramework STATIC
-        Core/Application.cpp
-        Core/Application.h
+        Core/BaseApplication.cpp
+        Core/BaseApplication.h
         Core/InputHandler.cpp
         Core/InputHandler.h
         Rendering/Camera.cpp

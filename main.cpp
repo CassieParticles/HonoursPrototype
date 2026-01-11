@@ -1,9 +1,8 @@
-﻿#include "Engine/Core/Application.h"
-
+﻿#include "Engine/Core/BaseApplication.h"
 
 int main()
 {
-    Application application;
+    BaseApplication application;
 
     application.Gameloop();
     
