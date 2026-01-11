@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "InputHandler.h"
-#include "Timer.h"
 #include "../Rendering/Camera.h"
 
 class Application

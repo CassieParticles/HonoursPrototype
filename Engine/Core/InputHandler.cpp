@@ -1,4 +1,5 @@
 ﻿#include "InputHandler.h"
+
 InputHandler::InputHandler(sf::RenderWindow* window):window{window}
 {
     keys.resize(sf::Keyboard::KeyCount);

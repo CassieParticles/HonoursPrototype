@@ -1,6 +1,6 @@
 ﻿#include "Application.h"
 
-#include <iostream>
+#include "Timer.h"
 
 Application::Application():window{sf::VideoMode({800,800}),"SFML Window"},input(&window)
 {
