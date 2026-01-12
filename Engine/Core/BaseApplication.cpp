@@ -1,16 +1,10 @@
-﻿#include "BaseApplication.h"
+#include "BaseApplication.h"
 
 #include "Timer.h"
 
 BaseApplication::BaseApplication():window{sf::VideoMode({800,800}),"SFML Window"},input(&window)
 {
     clearColour = sf::Color::Cyan;
-
-    camera.Zoom(1.0f);
-
-    tempShape.setFillColor(sf::Color::Red);
-    tempShape.setSize({1,1});
-    tempShape.setPosition({0,0});
 
     Timer::Init();
 }

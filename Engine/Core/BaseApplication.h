@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "InputHandler.h"
@@ -23,6 +23,5 @@ private:
 
     sf::Color clearColour;
 
-    sf::RectangleShape tempShape;
     Camera camera;
 };
