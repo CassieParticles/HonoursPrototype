@@ -14,7 +14,9 @@ add_library(HonoursFramework STATIC
         Rendering/Camera.cpp
         Rendering/Camera.h
         GameObjects/GameObject.cpp
-        GameObjects/GameObject.h)
+        GameObjects/GameObject.h
+        GameObjects/Transform.cpp
+        GameObjects/Transform.h)
 
 #SFML
 include(FetchContent)
