@@ -1,4 +1,4 @@
-#include "BaseApplication.h"
+﻿#include "BaseApplication.h"
 
 #include "Timer.h"
 
@@ -23,35 +23,19 @@ void BaseApplication::Gameloop()
         PollEvents();
         Input();
         Update();
+
+        //Pre-render
+        window.clear(clearColour);
+        window.setView(camera.getView());
+
         Render();
+
+        //Post-render
+        window.display();
     }
 }
 
 void BaseApplication::PollEvents()
 {
     input.PollEvents();
-}
-
-
-void BaseApplication::Input()
-{
-
-}
-
-
-void BaseApplication::Update() {}
-
-
-void BaseApplication::Render()
-{
-    window.clear(clearColour);
-    window.setView(camera.getView());
-
-    //Rendering stuff
-
-    window.draw(tempShape);
-
-
-
-    window.display();
 }

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "InputHandler.h"
@@ -11,11 +11,11 @@ public:
     virtual ~BaseApplication();
 
     void Gameloop();
-private:
+protected:
     virtual void PollEvents();
-    virtual void Input();
-    virtual void Update();
-    virtual void Render();
+    virtual void Input() = 0;
+    virtual void Update() = 0;
+    virtual void Render() = 0;
 
     //Systems
     sf::RenderWindow window;
