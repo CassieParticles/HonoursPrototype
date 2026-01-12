@@ -2,9 +2,13 @@
 
 #include <box2d/box2d.h>
 
+#include "Rigidbody.h"
+
 class PhysicsWorld
 {
     friend class WorldBuilder;
+    friend class Rigidbody;
+    friend class Rigidbody::BodyBuilder;
 public:
     class WorldBuilder
     {

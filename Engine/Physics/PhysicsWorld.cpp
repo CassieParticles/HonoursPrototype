@@ -9,5 +9,5 @@ PhysicsWorld::WorldBuilder::WorldBuilder()
 
 PhysicsWorld::WorldBuilder PhysicsWorld::CreateWorldBuilder()
 {
-    return WorldBuilder();
+    return {};
 }
