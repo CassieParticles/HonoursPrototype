@@ -12,5 +12,5 @@ void ColourBoxRenderable::Render(sf::RenderWindow* RenderWindow)
 
     shape.setFillColor(colour);
 
-    BaseRenderable::Render(RenderWindow);
+    RenderWindow->draw(shape);
 }

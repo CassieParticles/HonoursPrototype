@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <GameObjects/GameObject.h>
-
-#include "../Rendering/TestRenderable.h"
+#include <Rendering/ColourBoxRenderable.h>
 
 class TestObject:public GameObject
 {
@@ -10,5 +9,5 @@ public:
 
     void Render(sf::RenderWindow* window) override;
 protected:
-    TestRenderable testRenderable;
+    ColourBoxRenderable colourRenderable;
 };
