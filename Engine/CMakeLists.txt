@@ -20,7 +20,7 @@ add_library(HonoursFramework STATIC
         Rendering/ColourBoxRenderable.cpp
         Rendering/ColourBoxRenderable.h
         Physics/PhysicsSolver.cpp
-        Physics/PhysicsSolver.h)
+        Physics/PhysicsWorld.h)
 
 #SFML
 include(FetchContent)

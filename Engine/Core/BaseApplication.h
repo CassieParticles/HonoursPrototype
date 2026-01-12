@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "InputHandler.h"
-#include "../Physics/PhysicsSolver.h"
+#include "../Physics/PhysicsWorld.h"
 #include "../Rendering/Camera.h"
 
 class BaseApplication
@@ -21,7 +21,7 @@ protected:
     //Systems
     sf::RenderWindow window;
     InputHandler input;
-    PhysicsSolver physics;
+    PhysicsWorld physics;
 
     sf::Color clearColour;
 

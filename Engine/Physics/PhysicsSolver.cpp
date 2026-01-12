@@ -1,10 +1,10 @@
-﻿#include "PhysicsSolver.h"
-PhysicsSolver::WorldBuilder::WorldBuilder(PhysicsSolver* solver):physicsSolver(solver)
+﻿#include "PhysicsWorld.h"
+PhysicsWorld::WorldBuilder::WorldBuilder(PhysicsWorld* solver):physicsSolver(solver)
 {
     worldDef = b2DefaultWorldDef();
 }
 
-PhysicsSolver::WorldBuilder PhysicsSolver::CreateWorldBuilder()
+PhysicsWorld::WorldBuilder PhysicsWorld::CreateWorldBuilder()
 {
     return WorldBuilder(this);
 }

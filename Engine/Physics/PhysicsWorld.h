@@ -2,20 +2,20 @@
 
 #include <box2d/box2d.h>
 
-class PhysicsSolver
+class PhysicsWorld
 {
     friend class WorldBuilder;
 public:
     class WorldBuilder
     {
-        friend class PhysicsSolver;
+        friend class PhysicsWorld;
     public:
         WorldBuilder* SetGravity(const b2Vec2 gravity){worldDef.gravity = gravity;return this;}
 
         void Build() const {physicsSolver->worldId = b2CreateWorld(&worldDef);}
     protected:
-        WorldBuilder(PhysicsSolver* solver);
-        PhysicsSolver* physicsSolver;
+        WorldBuilder(PhysicsWorld* solver);
+        PhysicsWorld* physicsSolver;
         b2WorldDef worldDef;
     };
 
