@@ -1,10 +1,13 @@
 ﻿#include "PhysicsWorld.h"
-PhysicsWorld::WorldBuilder::WorldBuilder(PhysicsWorld* solver):physicsSolver(solver)
+
+b2WorldId PhysicsWorld::worldId;
+
+PhysicsWorld::WorldBuilder::WorldBuilder()
 {
     worldDef = b2DefaultWorldDef();
 }
 
 PhysicsWorld::WorldBuilder PhysicsWorld::CreateWorldBuilder()
 {
-    return WorldBuilder(this);
+    return WorldBuilder();
 }

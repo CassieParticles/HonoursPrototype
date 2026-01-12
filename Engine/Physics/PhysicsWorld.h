@@ -12,14 +12,13 @@ public:
     public:
         WorldBuilder* SetGravity(const b2Vec2 gravity){worldDef.gravity = gravity;return this;}
 
-        void Build() const {physicsSolver->worldId = b2CreateWorld(&worldDef);}
+        void Build() const {PhysicsWorld::worldId = b2CreateWorld(&worldDef);}
     protected:
-        WorldBuilder(PhysicsWorld* solver);
-        PhysicsWorld* physicsSolver;
+        WorldBuilder();
         b2WorldDef worldDef;
     };
 
-    WorldBuilder CreateWorldBuilder();
+    static WorldBuilder CreateWorldBuilder();
 protected:
-    b2WorldId worldId;
+    static b2WorldId worldId;
 };

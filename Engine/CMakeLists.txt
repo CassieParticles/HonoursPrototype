@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 4.1)
 
 add_library(HonoursFramework STATIC
         Core/BaseApplication.cpp
@@ -19,8 +19,9 @@ add_library(HonoursFramework STATIC
         GameObjects/Transform.h
         Rendering/ColourBoxRenderable.cpp
         Rendering/ColourBoxRenderable.h
-        Physics/PhysicsSolver.cpp
-        Physics/PhysicsWorld.h)
+        Physics/PhysicsWorld.cpp
+        Physics/PhysicsWorld.h
+        )
 
 #SFML
 include(FetchContent)

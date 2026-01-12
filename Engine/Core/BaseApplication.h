@@ -21,7 +21,6 @@ protected:
     //Systems
     sf::RenderWindow window;
     InputHandler input;
-    PhysicsWorld physics;
 
     sf::Color clearColour;
 
