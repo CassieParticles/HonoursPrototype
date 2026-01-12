@@ -9,8 +9,8 @@ add_library(HonoursFramework STATIC
         Rendering/Camera.h
         Core/Timer.cpp
         Core/Timer.h
-        Rendering/Renderable.cpp
-        Rendering/Renderable.h
+        Rendering/BaseRenderable.cpp
+        Rendering/BaseRenderable.h
         Rendering/Camera.cpp
         Rendering/Camera.h
         GameObjects/GameObject.cpp

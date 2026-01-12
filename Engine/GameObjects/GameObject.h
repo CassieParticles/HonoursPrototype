@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Transform.h"
-#include "../Rendering/Renderable.h"
+#include "../Rendering/BaseRenderable.h"
 
 
 class GameObject

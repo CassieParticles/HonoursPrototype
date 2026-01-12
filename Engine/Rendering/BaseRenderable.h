@@ -3,10 +3,10 @@
 
 #include "../GameObjects/GameObject.h"
 
-class Renderable
+class BaseRenderable
 {
 public:
-    Renderable(Transform* transform);
+    BaseRenderable(Transform* transform);
     virtual void Render(sf::RenderWindow* RenderWindow){}
 protected:
     Transform* transform;

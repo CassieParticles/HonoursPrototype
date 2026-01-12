@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include <Rendering/Renderable.h>
+#include <Rendering/BaseRenderable.h>
 
 
-class TestRenderable:public Renderable
+class TestRenderable:public BaseRenderable
 {
 public:
     TestRenderable(Transform* object);

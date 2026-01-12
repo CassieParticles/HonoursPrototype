@@ -1,5 +1,5 @@
 ﻿#include "TestRenderable.h"
-TestRenderable::TestRenderable(Transform* object):Renderable(object)
+TestRenderable::TestRenderable(Transform* object):BaseRenderable(object)
 {
     shape.setFillColor(sf::Color::Yellow);
     shape.setSize(sf::Vector2f(1.0f,1.0f));
