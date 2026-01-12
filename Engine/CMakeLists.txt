@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 4.1)
 
 add_library(HonoursFramework STATIC
         Core/BaseApplication.cpp
@@ -42,4 +42,5 @@ else()
         set_property(TARGET Box2D PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/libs/box2d/release/box2d.lib")
 endif()
 
-target_link_libraries(HonoursPrototype PUBLIC Box2D)
+target_link_libraries(HonoursFramework PUBLIC Box2D)
+target_include_directories(HonoursFramework PUBLIC libs/includes)

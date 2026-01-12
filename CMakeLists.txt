@@ -18,4 +18,3 @@ target_link_libraries(HonoursPrototype PUBLIC HonoursFramework)
 
 
 target_link_libraries(HonoursPrototype PUBLIC -static)
-target_include_directories(HonoursPrototype PUBLIC Engine/libs/includes)
