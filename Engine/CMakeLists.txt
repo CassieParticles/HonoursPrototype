@@ -23,7 +23,9 @@ add_library(HonoursFramework STATIC
         Physics/PhysicsWorld.h
         Physics/Rigidbody.cpp
         Physics/Rigidbody.h
-        )
+        Physics/ShapeBuilder.cpp
+        Physics/ShapeBuilder.h
+)
 
 #SFML
 include(FetchContent)
