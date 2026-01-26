@@ -1,4 +1,4 @@
-﻿#include "../MarchingSquares/MarchingSquaresObject.h"
+#include "../MarchingSquares/MarchingSquaresObject.h"
 MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height)
 {
     //Voxelgrid needs -ve values on it's edges
@@ -25,7 +25,7 @@ void MarchingSquaresObject::Generate()
             {
                 voxelGrid.getVoxel(x,y),
                 voxelGrid.getVoxel(x+1,y),
-                voxelGrid.getVoxel(x,y+1),
+                voxelGrid.getVoxel(x+1,y+1),
                 voxelGrid.getVoxel(x+1,y+1)
             };
 
