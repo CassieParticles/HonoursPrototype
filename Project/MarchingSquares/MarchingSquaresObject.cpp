@@ -1,19 +1,24 @@
-#include "../MarchingSquares/MarchingSquaresObject.h"
-MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height)
+﻿#include "../MarchingSquares/MarchingSquaresObject.h"
+MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(nullptr)
 {
     //Voxelgrid needs -ve values on it's edges
     voxelGrid.AddBorder(-1.0f);
+    voxelGrid.PrintValues();
+
+    Generate();
 }
 
 void MarchingSquaresObject::Render(sf::RenderWindow* window)
 {
-
+    renderable.Render(window);
 }
 
 void MarchingSquaresObject::Generate()
 {
     int width = voxelGrid.getWidth();
     int height = voxelGrid.getHeight();
+
+    MarchingSquaresRenderable::MSRenderableBuilder builder = renderable.GetBuilder();
 
     triangles.clear();
     for(int y=0;y<height - 1; ++y)
@@ -26,7 +31,7 @@ void MarchingSquaresObject::Generate()
                 voxelGrid.getVoxel(x,y),
                 voxelGrid.getVoxel(x+1,y),
                 voxelGrid.getVoxel(x+1,y+1),
-                voxelGrid.getVoxel(x+1,y+1)
+                voxelGrid.getVoxel(x,y+1)
             };
 
             //Get which case the cell is
@@ -60,7 +65,14 @@ void MarchingSquaresObject::Generate()
                     vertices[indexSet[i + 1]],
                     vertices[indexSet[i + 2]]
                 );
+
+                builder.AddTriangle({vertices[indexSet[i + 0]],
+                    vertices[indexSet[i + 1]],
+                    vertices[indexSet[i + 2]]});
             }
         }
     }
+
+
+    builder.Build();
 }

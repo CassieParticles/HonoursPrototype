@@ -3,6 +3,7 @@
 #include <GameObjects/GameObject.h>
 
 #include "GameObjects/TestObject.h"
+#include "MarchingSquares/MarchingSquaresObject.h"
 
 
 class Application:public BaseApplication
@@ -13,8 +14,13 @@ public:
 
 protected:
     TestObject testObject;
-
-
+    MarchingSquaresObject* MSObject;
+    float data[16] = {
+        1.0f,1.0f,1.0f,1.0f,
+        1.0f,1.0f,1.0f,1.0f,
+        1.0f,1.0f,1.0f,1.0f,
+        1.0f,1.0f,1.0f,1.0f
+    };
 
 
     void Input() override;
