@@ -1,5 +1,5 @@
 ﻿#include "../MarchingSquares/MarchingSquaresObject.h"
-MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(nullptr)
+MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(&transform)
 {
     //Voxelgrid needs -ve values on it's edges
     voxelGrid.AddBorder(-1.0f);

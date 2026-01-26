@@ -2,11 +2,18 @@
 MarchingSquaresRenderable::MarchingSquaresRenderable(Transform* transform):BaseRenderable(transform)
 {
     triangles.setPrimitiveType(sf::PrimitiveType::Triangles);
+
+    renderState = sf::RenderStates();
 }
 
 void MarchingSquaresRenderable::Render(sf::RenderWindow* RenderWindow)
 {
-    RenderWindow->draw(triangles);
+    renderState.transform = sf::Transform();
+    renderState.transform.translate(transform->GetPosition());
+    renderState.transform.scale(transform->GetScale());
+    renderState.transform.rotate(transform->GetRotation());
+
+    RenderWindow->draw(triangles,renderState);
 }
 
 MarchingSquaresRenderable::MSRenderableBuilder::MSRenderableBuilder(MarchingSquaresRenderable* renderable):renderable(renderable) {}

@@ -31,8 +31,9 @@ public:
         MarchingSquaresRenderable* renderable;
         MSRenderableBuilder(MarchingSquaresRenderable* renderable);
     };
-
     MSRenderableBuilder GetBuilder();
+
+    sf::RenderStates renderState;
 private:
     sf::VertexArray triangles;
 };
