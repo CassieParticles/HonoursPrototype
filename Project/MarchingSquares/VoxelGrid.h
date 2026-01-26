@@ -14,6 +14,8 @@ public:
     //Read values from the grid
     float getVoxel(int x, int y) const;
     float& operator[](int index) const;
+
+    void PrintValues();
 private:
     void AddColumnLeft();
     void AddColumnRight();

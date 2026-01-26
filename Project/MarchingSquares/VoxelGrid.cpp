@@ -1,4 +1,6 @@
 ﻿#include "VoxelGrid.h"
+
+#include <iostream>
 VoxelGrid::VoxelGrid(): width(0),height(0) {}
 
 VoxelGrid::VoxelGrid(float* data, int width, int height, int x, int y): width(width), height(height), x(x), y(y)
@@ -14,6 +16,20 @@ VoxelGrid::~VoxelGrid() {}
 float *VoxelGrid::GetData() const {return voxelGrid;}
 float VoxelGrid::getVoxel(int x, int y) const {return voxelGrid[y * width + x];}
 float& VoxelGrid::operator[](int index) const {return voxelGrid[index];}
+
+void VoxelGrid::PrintValues()
+{
+    for(int i=0;i<height;++i)
+    {
+        std::cout<<"[";
+        for(int j=0;j<width;++j)
+        {
+            std::cout<<voxelGrid[i * width + j];
+            if(j + 1 != width) { std::cout<<", "; }
+        }
+        std::cout<<"]"<<std::endl;
+    }
+}
 
 void VoxelGrid::AddColumnLeft()
 {
@@ -31,6 +47,7 @@ void VoxelGrid::AddColumnLeft()
     voxelGrid = newArr;
 
     width++;
+    x--;
 }
 
 void VoxelGrid::AddColumnRight()
@@ -64,6 +81,7 @@ void VoxelGrid::AddRowTop()
     voxelGrid = newArr;
 
     height++;
+    y--;
 }
 
 void VoxelGrid::AddRowBottom()
