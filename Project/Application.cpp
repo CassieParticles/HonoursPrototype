@@ -1,6 +1,7 @@
 ﻿#include "Application.h"
 
 #include <iostream>
+#include <Core/Timer.h>
 
 #include "MarchingSquares/VoxelGrid.h"
 
@@ -15,7 +16,8 @@ Application::Application()
     };
 
     MSObject = new MarchingSquaresObject(data,4,4);
-
+    MSObject->GetTransform().SetPosition(sf::Vector2f(5.0f,0.0f));
+    MSObject->GetTransform().SetScale(sf::Vector2f(0.2f,0.2f));
 }
 Application::~Application() {}
 
@@ -26,7 +28,7 @@ void Application::Input()
 
 void Application::Update()
 {
-
+    MSObject->GetTransform().SetRotation(sf::radians(Timer::getElapsedTime()));
 }
 
 void Application::Render()
