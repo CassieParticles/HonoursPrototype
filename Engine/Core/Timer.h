@@ -10,9 +10,11 @@ public:
     static void Update();
 
     static float getDeltaTime();
+    static float getElapsedTime();
 private:
     static sf::Clock clock;
 
     static sf::Time lastUpdateTime;
     static float deltaTime;
+    static float elapsedTime;
 };

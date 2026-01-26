@@ -3,6 +3,7 @@
 sf::Time Timer::lastUpdateTime = sf::Time::Zero;
 sf::Clock Timer::clock;
 float Timer::deltaTime = 0.0f;
+float Timer::elapsedTime = 0.0f;
 
 void Timer::Init()
 {
@@ -17,6 +18,8 @@ void Timer::Update()
     deltaTime = (currentTime - lastUpdateTime).asSeconds();
 
     lastUpdateTime = currentTime;
+    elapsedTime += deltaTime;
 }
 
 float Timer::getDeltaTime() {return deltaTime;}
+float Timer::getElapsedTime() {return elapsedTime;}
