@@ -10,6 +10,10 @@ add_executable(HonoursPrototype main.cpp
         Project/Application.h
         Project/GameObjects/TestObject.cpp
         Project/GameObjects/TestObject.h
+        Project/MarchingSquares/MarchingSquaresObject.cpp
+        Project/MarchingSquares/MarchingSquaresObject.h
+        Project/MarchingSquares/VoxelGrid.cpp
+        Project/MarchingSquares/VoxelGrid.h
 )
 
 add_subdirectory(Engine)
