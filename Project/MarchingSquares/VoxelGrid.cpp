@@ -31,14 +31,15 @@ void VoxelGrid::PrintValues()
     }
 }
 
-void VoxelGrid::AddColumnLeft()
+void VoxelGrid::AddColumnLeft(float defaultValue)
 {
     float* newArr = new float[(width + 1) * height];
 
     //Copy old data (one row at a time)
     for(int row=0;row < height;row++)
     {
-        newArr[(row + 1) * width] = 0.0f;
+        newArr[row * (width + 1)] = defaultValue;
+        //Set default value in new space
         std::copy(voxelGrid + row * width, voxelGrid + (row + 1) * width, newArr + row * (width + 1) + 1);
     }
 
@@ -50,7 +51,7 @@ void VoxelGrid::AddColumnLeft()
     x--;
 }
 
-void VoxelGrid::AddColumnRight()
+void VoxelGrid::AddColumnRight(float defaultValue)
 {
     float* newArr = new float[(width + 1) * height];
 
@@ -58,7 +59,8 @@ void VoxelGrid::AddColumnRight()
     for(int row=0;row<height;row++)
     {
         std::copy(voxelGrid + row * width, voxelGrid + (row + 1) * width, newArr + row * (width + 1));
-        newArr[(row + 1) * width - 1] = 0.0f;
+        //Set default value in new space
+        newArr[(row + 1) * (width + 1) - 1] = defaultValue;
     }
 
     //Overwrite with new array
@@ -68,13 +70,19 @@ void VoxelGrid::AddColumnRight()
     width++;
 }
 
-void VoxelGrid::AddRowTop()
+void VoxelGrid::AddRowTop(float defaultValue)
 {
     //Create larger array
     float* newArr = new float[width * (height + 1)];
 
     //Copy old data into array (offset by width)
     std::copy(voxelGrid,voxelGrid + (width * height), newArr + width);
+
+    //Set default valuein new space
+    for(int i=0;i<width;++i)
+    {
+        newArr[i] = defaultValue;
+    }
 
     //Overwrite with new array
     delete[] voxelGrid;
@@ -84,13 +92,19 @@ void VoxelGrid::AddRowTop()
     y--;
 }
 
-void VoxelGrid::AddRowBottom()
+void VoxelGrid::AddRowBottom(float defaultValue)
 {
     //Create larger array
     float* newArr = new float[width * (height + 1)];
 
     //Copy old data into array
     std::copy(voxelGrid,voxelGrid + (width * height), newArr);
+
+    //Set default value in new space
+    for(int i=0;i<width;++i)
+    {
+        newArr[width * height + i] = defaultValue;
+    }
 
     //Overwrite with new array
     delete[] voxelGrid;

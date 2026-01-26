@@ -16,11 +16,11 @@ public:
     float& operator[](int index) const;
 
     void PrintValues();
+    void AddColumnLeft(float defaultValue = 0.0f);
+    void AddColumnRight(float defaultValue = 0.0f);
+    void AddRowTop(float defaultValue = 0.0f);
+    void AddRowBottom(float defaultValue = 0.0f);
 private:
-    void AddColumnLeft();
-    void AddColumnRight();
-    void AddRowTop();
-    void AddRowBottom();
 
     float* voxelGrid;
 
