@@ -31,6 +31,14 @@ void VoxelGrid::PrintValues()
     }
 }
 
+void VoxelGrid::AddBorder(float defaultValue)
+{
+    AddColumnLeft(defaultValue);
+    AddColumnRight(defaultValue);
+    AddRowTop(defaultValue);
+    AddRowBottom(defaultValue);
+}
+
 void VoxelGrid::AddColumnLeft(float defaultValue)
 {
     float* newArr = new float[(width + 1) * height];

@@ -15,12 +15,16 @@ public:
     float getVoxel(int x, int y) const;
     float& operator[](int index) const;
 
+    int getWidth() const {return width;}
+    int getHeight() const {return height;}
+
     void PrintValues();
+    void AddBorder(float defaultValue = 0.0f);
+private:
     void AddColumnLeft(float defaultValue = 0.0f);
     void AddColumnRight(float defaultValue = 0.0f);
     void AddRowTop(float defaultValue = 0.0f);
     void AddRowBottom(float defaultValue = 0.0f);
-private:
 
     float* voxelGrid;
 
