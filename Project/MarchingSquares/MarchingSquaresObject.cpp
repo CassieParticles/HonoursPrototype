@@ -46,10 +46,10 @@ void MarchingSquaresObject::Generate()
 
             //Get the vertex position of each corner
             sf::Vector2f vertices[8];
-            vertices[0] = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
-            vertices[2] = sf::Vector2f(static_cast<float>(x + 1), static_cast<float>(y));
-            vertices[4] = sf::Vector2f(static_cast<float>(x + 1), static_cast<float>(y + 1));
-            vertices[6] = sf::Vector2f(static_cast<float>(x), static_cast<float>(y + 1));
+            vertices[0] = sf::Vector2f(static_cast<float>(x + voxelGrid.getX()), static_cast<float>(y + voxelGrid.getY()) );
+            vertices[2] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid.getX()), static_cast<float>(y + voxelGrid.getY()) );
+            vertices[4] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid.getX()), static_cast<float>(y + 1 + voxelGrid.getY()) );
+            vertices[6] = sf::Vector2f(static_cast<float>(x + voxelGrid.getX()), static_cast<float>(y + 1 + voxelGrid.getY()) );
 
             //Calculate the vertex position of each midpoint (lerp between positions)
             vertices[1] = findMidpointX(vertices[0],vertices[2],cornerValues[0],cornerValues[1]);

@@ -15,8 +15,11 @@ public:
     float getVoxel(int x, int y) const;
     float& operator[](int index) const;
 
-    int getWidth() const {return width;}
-    int getHeight() const {return height;}
+    [[nodiscard]]int getWidth() const {return width;}
+    [[nodiscard]]int getHeight() const {return height;}
+
+    [[nodiscard]]int getX() const { return x; }
+    [[nodiscard]]int getY() const { return y; }
 
     void PrintValues();
     void AddBorder(float defaultValue = 0.0f);
