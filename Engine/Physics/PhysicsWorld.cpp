@@ -11,3 +11,8 @@ PhysicsWorld::WorldBuilder PhysicsWorld::CreateWorldBuilder()
 {
     return WorldBuilder();
 }
+
+b2WorldId PhysicsWorld::GetWorldId()
+{
+    return worldId;
+}

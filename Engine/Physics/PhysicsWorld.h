@@ -19,6 +19,7 @@ public:
     };
 
     static WorldBuilder CreateWorldBuilder();
+    static b2WorldId GetWorldId();
 protected:
     static b2WorldId worldId;
 };
