@@ -42,11 +42,15 @@ Transform* Transform::SetScale(float x, float y)
     return this;
 }
 
-sf::Vector2f Transform::GetPosition() {return position;}
-sf::Angle Transform::GetRotation() {return rotation;}
-sf::Vector2f Transform::GetScale() {return scale;}
+sf::Vector2f Transform::GetPositionSf() {return position;}
+sf::Angle Transform::GetRotationSf() {return rotation;}
+sf::Vector2f Transform::GetScaleSf() {return scale;}
 
-sf::Transform Transform::GetTransform()
+b2Vec2 Transform::GetPositionb2() {return {position.x,position.y};}
+b2Rot Transform::GetRotationb2() {return b2MakeRot(rotation.asRadians());}
+b2Vec2 Transform::GetScaleb2() {return {scale.x,scale.y};}
+
+sf::Transform Transform::GetTransformSf()
 {
     if(!transformUpdateFlag)
     {
