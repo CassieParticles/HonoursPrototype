@@ -2,10 +2,11 @@
 #include <GameObjects/GameObject.h>
 #include <Rendering/ColourBoxRenderable.h>
 
-class StaticPhysicsFloor: public GameObject
+
+class DynamicPhysicsBox: public GameObject
 {
 public:
-    StaticPhysicsFloor();
+    DynamicPhysicsBox();
 
     void Init() override;
 

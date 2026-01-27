@@ -1,9 +1,6 @@
 ﻿#include "Application.h"
 
 #include <iostream>
-#include <Core/Timer.h>
-
-#include "MarchingSquares/VoxelGrid.h"
 
 Application::Application()
 {
@@ -21,6 +18,9 @@ Application::Application()
     floorObj.GetTransform().SetScale(10,1);
 
     floorObj.Init();
+
+    boxObj.GetTransform().SetPosition(0,0);
+    boxObj.Init();
 }
 Application::~Application() {}
 
@@ -38,5 +38,7 @@ void Application::Render()
 {
     testObject.Render(&window);
     MSObject->Render(&window);
+
     floorObj.Render(&window);
+    boxObj.Render(&window);
 }
