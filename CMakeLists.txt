@@ -16,6 +16,8 @@ add_executable(HonoursPrototype main.cpp
         Project/MarchingSquares/VoxelGrid.h
         Project/MarchingSquares/MarchingSquaresRenderable.cpp
         Project/MarchingSquares/MarchingSquaresRenderable.h
+        Project/GameObjects/StaticPhysicsFloor.cpp
+        Project/GameObjects/StaticPhysicsFloor.h
 )
 
 add_subdirectory(Engine)

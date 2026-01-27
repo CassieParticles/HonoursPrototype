@@ -16,8 +16,11 @@ Application::Application()
     };
 
     MSObject = new MarchingSquaresObject(data,4,4);
-    MSObject->GetTransform().SetPosition(sf::Vector2f(5.0f,0.0f));
-    MSObject->GetTransform().SetScale(sf::Vector2f(0.2f,0.2f));
+
+    floorObj.GetTransform().SetPosition(0,3);
+    floorObj.GetTransform().SetScale(10,1);
+
+    floorObj.Init();
 }
 Application::~Application() {}
 
@@ -28,11 +31,12 @@ void Application::Input()
 
 void Application::Update()
 {
-    MSObject->GetTransform().SetRotation(sf::radians(Timer::getElapsedTime()));
+
 }
 
 void Application::Render()
 {
     testObject.Render(&window);
     MSObject->Render(&window);
+    floorObj.Render(&window);
 }

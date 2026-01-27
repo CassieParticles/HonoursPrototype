@@ -9,9 +9,9 @@ MarchingSquaresRenderable::MarchingSquaresRenderable(Transform* transform):BaseR
 void MarchingSquaresRenderable::Render(sf::RenderWindow* RenderWindow)
 {
     renderState.transform = sf::Transform();
-    renderState.transform.translate(transform->GetPosition());
-    renderState.transform.scale(transform->GetScale());
-    renderState.transform.rotate(transform->GetRotation());
+    renderState.transform.translate(transform->GetPositionSf());
+    renderState.transform.scale(transform->GetScaleSf());
+    renderState.transform.rotate(transform->GetRotationSf());
 
     RenderWindow->draw(triangles,renderState);
 }
