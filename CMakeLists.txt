@@ -20,6 +20,9 @@ add_executable(HonoursPrototype main.cpp
         Project/GameObjects/StaticPhysicsFloor.h
         Project/GameObjects/DynamicPhysicsBox.cpp
         Project/GameObjects/DynamicPhysicsBox.h
+        Project/MarchingSquares/MarchingSquaresPhysics.cpp
+        Project/MarchingSquares/MarchingSquaresPhysics.h
+        Project/MarchingSquares/Triangle.h
 )
 
 add_subdirectory(Engine)

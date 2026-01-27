@@ -6,23 +6,20 @@ Application::Application()
 {
     PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,30.0f))->Build();
 
-
-    float data[16] = {
-        1.0f,1.0f,1.0f,1.0f,
-        1.0f,1.0f,1.0f,1.0f,
-        1.0f,1.0f,1.0f,1.0f,
-        1.0f,0.1f,0.1f,1.0f
+    float data[32] = {
+        1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,
+        1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f
     };
 
-    MSObject = new MarchingSquaresObject(data,4,4);
+    MSObject = new MarchingSquaresObject(data,16,2);
 
-    floorObj.GetTransform().SetPosition(-1,8);
+    floorObj.GetTransform().SetPosition(-1,5);
     floorObj.GetTransform().SetRotation(sf::degrees(10));
     floorObj.GetTransform().SetScale(10,1);
 
-    floorObj.Init();
+    //floorObj.Init();
 
-    boxObj.GetTransform().SetPosition(0,-5);
+    boxObj.GetTransform().SetPosition(5,-2);
     boxObj.Init();
 }
 Application::~Application() {}
@@ -39,9 +36,9 @@ void Application::Update()
 
 void Application::Render()
 {
-    testObject.Render(&window);
+    //testObject.Render(&window);
     MSObject->Render(&window);
 
-    floorObj.Render(&window);
+    //floorObj.Render(&window);
     boxObj.Render(&window);
 }

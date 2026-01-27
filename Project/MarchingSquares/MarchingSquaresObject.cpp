@@ -1,7 +1,7 @@
 ﻿#include "../MarchingSquares/MarchingSquaresObject.h"
-MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(&transform)
+MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(&transform), physics(&transform)
 {
-    //Voxelgrid needs -ve values on it's edges
+    //Voxel grid needs -ve values on it's edges
     voxelGrid.AddBorder(-1.0f);
     voxelGrid.PrintValues();
 
@@ -18,7 +18,9 @@ void MarchingSquaresObject::Generate()
     int width = voxelGrid.getWidth();
     int height = voxelGrid.getHeight();
 
-    MarchingSquaresRenderable::MSRenderableBuilder builder = renderable.GetBuilder();
+    MarchingSquaresRenderable::MSRenderableBuilder graphicsBuilder = renderable.GetBuilder();
+    MarchingSquaresPhysics::MSPhysicsBuilder physicsBuilder = physics.GetBuilder();
+    physicsBuilder.SetDynamic(false);
 
     triangles.clear();
     for(int y=0;y<height - 1; ++y)
@@ -66,7 +68,11 @@ void MarchingSquaresObject::Generate()
                     vertices[indexSet[i + 2]]
                 );
 
-                builder.AddTriangle({vertices[indexSet[i + 0]],
+                graphicsBuilder.AddTriangle({vertices[indexSet[i + 0]],
+                    vertices[indexSet[i + 1]],
+                    vertices[indexSet[i + 2]]});
+
+                physicsBuilder.AddTriangle({vertices[indexSet[i + 0]],
                     vertices[indexSet[i + 1]],
                     vertices[indexSet[i + 2]]});
             }
@@ -74,5 +80,6 @@ void MarchingSquaresObject::Generate()
     }
 
 
-    builder.Build();
+    graphicsBuilder.Build();
+    physicsBuilder.Build();
 }

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <GameObjects/GameObject.h>
 
+#include "MarchingSquaresPhysics.h"
 #include "MarchingSquaresRenderable.h"
 #include "VoxelGrid.h"
 
@@ -18,6 +19,7 @@ private:
     std::vector<Triangle> triangles;
 
     MarchingSquaresRenderable renderable;
+    MarchingSquaresPhysics physics;
 
     //Indices of triangles in each case, 8 means no more triangles, CW order, starting at lowest
     constexpr static int indexTable[16][10]
