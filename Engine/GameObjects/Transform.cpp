@@ -14,10 +14,16 @@ Transform* Transform::SetPosition(sf::Vector2f position)
     transformUpdateFlag = false;
     return this;
 }
+
+Transform* Transform::SetPosition(b2Vec2 position)
+{
+    return SetPosition(position.x,position.y);
+}
+
+
 Transform* Transform::SetPosition(float x, float y)
 {
-    SetPosition(sf::Vector2f(x,y));
-    return this;
+    return SetPosition(sf::Vector2f(x,y));
 }
 Transform* Transform::SetRotation(sf::Angle rotation)
 {
@@ -25,22 +31,36 @@ Transform* Transform::SetRotation(sf::Angle rotation)
     transformUpdateFlag = false;
     return this;
 }
+
+Transform* Transform::SetRotation(b2Rot rotation)
+{
+    return SetRotation(b2Rot_GetAngle(rotation));
+}
+
 Transform* Transform::SetRotation(float rotation)
 {
-    SetRotation(sf::radians(rotation));
-    return this;
+    return SetRotation(sf::radians(rotation));
 }
+
+
+
 Transform* Transform::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
     transformUpdateFlag = false;
     return this;
 }
+
+Transform* Transform::SetScale(b2Vec2 scale)
+{
+    return SetScale(scale.x,scale.y);
+}
+
 Transform* Transform::SetScale(float x, float y)
 {
-    SetScale(sf::Vector2f(x,y));
-    return this;
+    return SetScale(sf::Vector2f(x,y));
 }
+
 
 sf::Vector2f Transform::GetPositionSf() {return position;}
 sf::Angle Transform::GetRotationSf() {return rotation;}
