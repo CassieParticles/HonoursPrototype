@@ -24,7 +24,11 @@ void DynamicPhysicsBox::Init()
 
 void DynamicPhysicsBox::Update()
 {
+    b2Vec2 bodyPos = b2Body_GetPosition(bodyId);
+    b2Rot bodyRot = b2Body_GetRotation(bodyId);
 
+    transform.SetPosition(bodyPos);
+    transform.SetRotation(bodyRot);
 }
 
 void DynamicPhysicsBox::Render(sf::RenderWindow* window)
