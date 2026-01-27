@@ -2,6 +2,8 @@
 #include <Core/BaseApplication.h>
 #include <GameObjects/GameObject.h>
 
+#include "GameObjects/DynamicPhysicsBox.h"
+#include "GameObjects/StaticPhysicsFloor.h"
 #include "GameObjects/TestObject.h"
 #include "MarchingSquares/MarchingSquaresObject.h"
 
@@ -22,6 +24,8 @@ protected:
         1.0f,1.0f,1.0f,1.0f
     };
 
+    StaticPhysicsFloor floorObj;
+    DynamicPhysicsBox boxObj;
 
     void Input() override;
     void Update() override;

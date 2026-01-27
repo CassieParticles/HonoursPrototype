@@ -1,13 +1,12 @@
 ﻿#include "Application.h"
 
 #include <iostream>
-#include <Core/Timer.h>
-
-#include "MarchingSquares/VoxelGrid.h"
 
 Application::Application()
 {
-    PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,-10.0f))->Build();
+    PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,30.0f))->Build();
+
+
     float data[16] = {
         1.0f,1.0f,1.0f,1.0f,
         1.0f,1.0f,1.0f,1.0f,
@@ -16,8 +15,15 @@ Application::Application()
     };
 
     MSObject = new MarchingSquaresObject(data,4,4);
-    MSObject->GetTransform().SetPosition(sf::Vector2f(5.0f,0.0f));
-    MSObject->GetTransform().SetScale(sf::Vector2f(0.2f,0.2f));
+
+    floorObj.GetTransform().SetPosition(-1,8);
+    floorObj.GetTransform().SetRotation(sf::degrees(10));
+    floorObj.GetTransform().SetScale(10,1);
+
+    floorObj.Init();
+
+    boxObj.GetTransform().SetPosition(0,-5);
+    boxObj.Init();
 }
 Application::~Application() {}
 
@@ -28,11 +34,14 @@ void Application::Input()
 
 void Application::Update()
 {
-    MSObject->GetTransform().SetRotation(sf::radians(Timer::getElapsedTime()));
+    boxObj.Update();
 }
 
 void Application::Render()
 {
     testObject.Render(&window);
     MSObject->Render(&window);
+
+    floorObj.Render(&window);
+    boxObj.Render(&window);
 }

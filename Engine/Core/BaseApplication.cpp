@@ -22,6 +22,10 @@ void BaseApplication::Gameloop()
 
         PollEvents();
         Input();
+
+        //Pre-update
+        PhysicsWorld::UpdateWorld();
+
         Update();
 
         //Pre-render
