@@ -1,4 +1,7 @@
 ﻿#include "MarchingSquaresRenderable.h"
+
+#include "Triangle.h"
+
 MarchingSquaresRenderable::MarchingSquaresRenderable(Transform* transform):BaseRenderable(transform)
 {
     triangles.setPrimitiveType(sf::PrimitiveType::Triangles);
@@ -17,7 +20,6 @@ void MarchingSquaresRenderable::Render(sf::RenderWindow* RenderWindow)
 }
 
 MarchingSquaresRenderable::MSRenderableBuilder::MSRenderableBuilder(MarchingSquaresRenderable* renderable):renderable(renderable) {}
-void MarchingSquaresRenderable::MSRenderableBuilder::AddTriangle(Triangle triangle) {triangles.push_back(triangle);}
 
 void MarchingSquaresRenderable::MSRenderableBuilder::Build()
 {

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <Rendering/BaseRenderable.h>
 
-#include "Triangle.h"
+#include "TriangleBuilder.h"
 
 class MarchingSquaresRenderable:BaseRenderable
 {
@@ -10,16 +10,14 @@ public:
     void Render(sf::RenderWindow* RenderWindow) override;
 
 
-    class MSRenderableBuilder
+    class MSRenderableBuilder: public TriangleBuilder
     {
         friend class MarchingSquaresRenderable;
     public:
-        void AddTriangle(Triangle triangle);
-        void Build();
-    private:
-        std::vector<Triangle> triangles;
-        MarchingSquaresRenderable* renderable;
+        void Build() override;
+    protected:
         MSRenderableBuilder(MarchingSquaresRenderable* renderable);
+        MarchingSquaresRenderable* renderable;
     };
     MSRenderableBuilder GetBuilder();
 

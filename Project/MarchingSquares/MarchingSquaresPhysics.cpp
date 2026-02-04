@@ -2,14 +2,11 @@
 
 #include <Physics/PhysicsWorld.h>
 
+#include "Triangle.h"
+
 MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{transform}
 {
 
-}
-
-void MarchingSquaresPhysics::MSPhysicsBuilder::AddTriangle(Triangle triangle)
-{
-    triangles.push_back(triangle);
 }
 
 void MarchingSquaresPhysics::MSPhysicsBuilder::SetDynamic(bool isDynamic) {this->isDynamic = isDynamic;}

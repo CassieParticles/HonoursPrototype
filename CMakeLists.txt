@@ -23,6 +23,8 @@ add_executable(HonoursPrototype main.cpp
         Project/MarchingSquares/MarchingSquaresPhysics.cpp
         Project/MarchingSquares/MarchingSquaresPhysics.h
         Project/MarchingSquares/Triangle.h
+        Project/MarchingSquares/TriangleBuilder.cpp
+        Project/MarchingSquares/TriangleBuilder.h
 )
 
 add_subdirectory(Engine)

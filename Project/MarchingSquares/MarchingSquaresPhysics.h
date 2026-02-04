@@ -3,26 +3,24 @@
 #include <box2d/box2d.h>
 #include <GameObjects/Transform.h>
 
-#include "Triangle.h"
+#include "TriangleBuilder.h"
 
 class MarchingSquaresPhysics
 {
 public:
     MarchingSquaresPhysics(Transform* transform);
 
-    class MSPhysicsBuilder
+    class MSPhysicsBuilder: public TriangleBuilder
     {
         friend class MarchingSquaresPhysics;
     public:
-        void AddTriangle(Triangle triangle);
         void SetDynamic(bool isDynamic);
 
-        void Build();
-    private:
+        void Build() override;
+    protected:
         MSPhysicsBuilder(MarchingSquaresPhysics* object);
         MarchingSquaresPhysics* object;
 
-        std::vector<Triangle> triangles;
         bool isDynamic;
     };
 

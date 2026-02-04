@@ -1,4 +1,7 @@
 ﻿#include "../MarchingSquares/MarchingSquaresObject.h"
+
+#include "Triangle.h"
+
 MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(&transform), physics(&transform)
 {
     //Voxel grid needs -ve values on it's edges
