@@ -1,20 +1,18 @@
 ﻿#pragma once
 
 #include <GameObjects/GameObject.h>
+#include "MSComponent.h"
 
-
-
-class MSTriangleBuilder;
 class VoxelGrid;
 
 class MSGenerator
 {
 public:
-    MSGenerator();
+    MSGenerator(VoxelGrid* grid);
 
     void AddBuilder(MSTriangleBuilder* builder);
 
-    void Generate();
+    virtual void Generate() = 0;
 protected:
     VoxelGrid* grid;
     std::vector<MSTriangleBuilder*> builders;
