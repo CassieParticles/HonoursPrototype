@@ -33,6 +33,10 @@ add_executable(HonoursPrototype main.cpp
         Project/MSNew/MSComponent.h
         Project/MSNew/Generators/MSBasicGenerator.cpp
         Project/MSNew/Generators/MSBasicGenerator.h
+        Project/MSNew/Components/MSTriangleRenderer.cpp
+        Project/MSNew/Components/MSTriangleRenderer.h
+        Project/MSNew/Components/MSTrianglePhysics.cpp
+        Project/MSNew/Components/MSTrianglePhysics.h
 )
 
 add_subdirectory(Engine)
