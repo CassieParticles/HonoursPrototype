@@ -1,5 +1,7 @@
 ﻿#include "PhysicsWorld.h"
 
+#include <tracy/Tracy.hpp>
+
 #include "../Core/Timer.h"
 
 b2WorldId PhysicsWorld::worldId;
@@ -21,6 +23,7 @@ b2WorldId PhysicsWorld::GetWorldId()
 
 void PhysicsWorld::UpdateWorld()
 {
+    ZoneScopedN("PhysicsUpdate")
     float deltaTime = Timer::getDeltaTime();
     b2World_Step(worldId,deltaTime,4);
 }

@@ -1,6 +1,7 @@
 ﻿#include "BaseApplication.h"
 
 #include "Timer.h"
+#include <tracy/Tracy.hpp>
 
 BaseApplication::BaseApplication():window{sf::VideoMode({800,800}),"SFML Window"},input(&window)
 {
@@ -18,24 +19,47 @@ void BaseApplication::Gameloop()
 {
     while(window.isOpen())
     {
-        Timer::Update();
+        FrameMark;
 
-        PollEvents();
-        Input();
+        {
+            ZoneScopedN("TimerUpdate")
+            Timer::Update();
+        }
+
+        {
+            ZoneScopedN("WindowPoll")
+            PollEvents();
+        }
+        {
+            ZoneScopedN("Input")
+            Input();
+        }
 
         //Pre-update
         PhysicsWorld::UpdateWorld();
 
-        Update();
+        {
+            ZoneScopedN("Update")
+            Update();
+        }
 
         //Pre-render
-        window.clear(clearColour);
-        window.setView(camera.getView());
+        {
+            ZoneScopedN("Prerender")
+            window.clear(clearColour);
+            window.setView(camera.getView());
+        }
 
-        Render();
+        {
+            ZoneScopedN("Render")
+            Render();
+        }
 
         //Post-render
-        window.display();
+        {
+            ZoneScopedN("Window Update")
+            window.display();
+        }
     }
 }
 
