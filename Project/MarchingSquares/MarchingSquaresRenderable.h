@@ -7,6 +7,7 @@ class MarchingSquaresRenderable:BaseRenderable
 {
 public:
     MarchingSquaresRenderable(Transform* transform);
+
     void Render(sf::RenderWindow* RenderWindow) override;
 
 
@@ -21,7 +22,7 @@ public:
     };
     MSRenderableBuilder GetBuilder();
 
-    sf::RenderStates renderState;
 private:
+    sf::RenderStates renderState;
     sf::VertexArray triangles;
 };
