@@ -10,7 +10,7 @@ public:
 
     virtual void Build() = 0;
 protected:
-    MSTriangleBuilder();
+    MSTriangleBuilder(){}
 
     std::vector<Triangle> triangles;
 };
