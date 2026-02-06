@@ -8,9 +8,9 @@ void MSBasicGenerator::Generate()
     int width = grid->getWidth();
     int height = grid->getHeight();
 
-    for(int y = 0; y < height; y++)
+    for(int y = 0; y < height - 1; y++)
     {
-        for(int x = 0; x < width; x++)
+        for(int x = 0; x < width - 1; x++)
         {
             //corner values
             float cornerValues[4]
