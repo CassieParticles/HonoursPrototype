@@ -6,6 +6,7 @@
 #include "GameObjects/StaticPhysicsFloor.h"
 #include "GameObjects/TestObject.h"
 #include "MarchingSquares/MarchingSquaresObject.h"
+#include "MSNew/MSObject.h"
 
 
 class Application:public BaseApplication
@@ -16,7 +17,9 @@ public:
 
 protected:
     TestObject testObject;
-    MarchingSquaresObject* MSObject;
+    //MarchingSquaresObject* MSObject;
+
+    MSObject msObject;
 
     StaticPhysicsFloor floorObj;
     DynamicPhysicsBox boxObj;
