@@ -19,6 +19,9 @@ public:
     };
 
     static WorldBuilder CreateWorldBuilder();
+    static b2WorldId GetWorldId();
+
+    static void UpdateWorld();
 protected:
     static b2WorldId worldId;
 };

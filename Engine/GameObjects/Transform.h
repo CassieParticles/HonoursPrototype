@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <SFML/Graphics.hpp>
+#include <box2d/box2d.h>
 
 class Transform
 {
@@ -8,19 +9,26 @@ public:
     Transform(sf::Vector2f position = sf::Vector2f(), sf::Angle rotation=sf::Angle(), sf::Vector2f scale = sf::Vector2f(1,1));
 
     Transform* SetPosition(sf::Vector2f position);
+    Transform* SetPosition(b2Vec2 position);
     Transform* SetPosition(float x, float y);
 
     Transform* SetRotation(sf::Angle rotation);
+    Transform* SetRotation(b2Rot rotation);
     Transform* SetRotation(float rotation);
 
     Transform* SetScale(sf::Vector2f scale);
+    Transform* SetScale(b2Vec2 scale);
     Transform* SetScale(float x, float y);
 
-    sf::Vector2f GetPosition();
-    sf::Angle GetRotation();
-    sf::Vector2f GetScale();
+    sf::Vector2f GetPositionSf();
+    sf::Angle GetRotationSf();
+    sf::Vector2f GetScaleSf();
 
-    sf::Transform GetTransform();
+    b2Vec2 GetPositionb2();
+    b2Rot GetRotationb2();
+    b2Vec2 GetScaleb2();
+
+    sf::Transform GetTransformSf();
 protected:
     void UpdateTransform();
     sf::Transform transform;

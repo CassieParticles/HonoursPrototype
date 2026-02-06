@@ -35,6 +35,17 @@ FetchContent_MakeAvailable(SFML)
 
 target_link_libraries(HonoursFramework PUBLIC SFML::Graphics)
 
+FetchContent_Declare (
+        tracy
+        GIT_REPOSITORY https://github.com/wolfpld/tracy.git
+        GIT_TAG master
+        GIT_SHALLOW TRUE
+        GIT_PROGRESS TRUE
+)
+FetchContent_MakeAvailable (tracy)
+
+target_link_libraries(HonoursFramework PUBLIC TracyClient)
+
 
 #Box2D
 add_library(Box2D STATIC IMPORTED GLOBAL)

@@ -36,6 +36,7 @@
 *.exe
 *.out
 *.app
+!TracyProfilerClient/tracy-profiler.exe
 
 # debug information files
 *.dwo

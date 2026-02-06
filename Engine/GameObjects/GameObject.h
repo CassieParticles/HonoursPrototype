@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Transform.h"
-#include "../Rendering/BaseRenderable.h"
 
 
 class GameObject
@@ -11,6 +10,10 @@ class GameObject
 public:
     GameObject();
     virtual ~GameObject();
+
+    Transform& GetTransform(){return transform;}
+
+    virtual void Init() {}
 
     virtual void TakeInput() {}
     virtual void Update() {}

@@ -10,6 +10,33 @@ add_executable(HonoursPrototype main.cpp
         Project/Application.h
         Project/GameObjects/TestObject.cpp
         Project/GameObjects/TestObject.h
+        Project/MarchingSquares/MarchingSquaresObject.cpp
+        Project/MarchingSquares/MarchingSquaresObject.h
+        Project/MarchingSquares/VoxelGrid.cpp
+        Project/MarchingSquares/VoxelGrid.h
+        Project/MarchingSquares/MarchingSquaresRenderable.cpp
+        Project/MarchingSquares/MarchingSquaresRenderable.h
+        Project/GameObjects/StaticPhysicsFloor.cpp
+        Project/GameObjects/StaticPhysicsFloor.h
+        Project/GameObjects/DynamicPhysicsBox.cpp
+        Project/GameObjects/DynamicPhysicsBox.h
+        Project/MarchingSquares/MarchingSquaresPhysics.cpp
+        Project/MarchingSquares/MarchingSquaresPhysics.h
+        Project/MarchingSquares/Triangle.h
+        Project/MarchingSquares/TriangleBuilder.cpp
+        Project/MarchingSquares/TriangleBuilder.h
+        Project/MSNew/MSObject.cpp
+        Project/MSNew/MSObject.h
+        Project/MSNew/MSGenerator.cpp
+        Project/MSNew/MSGenerator.h
+        Project/MSNew/MSComponent.cpp
+        Project/MSNew/MSComponent.h
+        Project/MSNew/Generators/MSBasicGenerator.cpp
+        Project/MSNew/Generators/MSBasicGenerator.h
+        Project/MSNew/Components/MSTriangleRenderer.cpp
+        Project/MSNew/Components/MSTriangleRenderer.h
+        Project/MSNew/Components/MSTrianglePhysics.cpp
+        Project/MSNew/Components/MSTrianglePhysics.h
 )
 
 add_subdirectory(Engine)
