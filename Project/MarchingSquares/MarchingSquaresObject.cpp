@@ -11,6 +11,11 @@ MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height,
     Generate(dynamic);
 }
 
+void MarchingSquaresObject::Update()
+{
+    physics.Update();
+}
+
 void MarchingSquaresObject::Render(sf::RenderWindow* window)
 {
     renderable.Render(window);

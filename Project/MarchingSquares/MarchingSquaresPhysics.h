@@ -25,13 +25,13 @@ public:
     };
 
     MSPhysicsBuilder GetBuilder();
+    void Update();
 private:
     Transform* transform;
 
     b2BodyId bodyId;
     std::vector<b2ShapeId> shapes;
 
-    void Update();
 };
 
 

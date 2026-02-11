@@ -11,6 +11,9 @@ class MarchingSquaresObject : public GameObject
 {
 public:
     MarchingSquaresObject(float* data, int width, int height, bool dynamic = false);
+
+    void Update() override;
+
     void Render(sf::RenderWindow* window) override;//Overwrite with new array//Overwrite with new array
 private:
     void Generate(bool dynamic = false);
