@@ -25,18 +25,6 @@ add_executable(HonoursPrototype main.cpp
         Project/MarchingSquares/Triangle.h
         Project/MarchingSquares/TriangleBuilder.cpp
         Project/MarchingSquares/TriangleBuilder.h
-        Project/MSNew/MSObject.cpp
-        Project/MSNew/MSObject.h
-        Project/MSNew/MSGenerator.cpp
-        Project/MSNew/MSGenerator.h
-        Project/MSNew/MSComponent.cpp
-        Project/MSNew/MSComponent.h
-        Project/MSNew/Generators/MSBasicGenerator.cpp
-        Project/MSNew/Generators/MSBasicGenerator.h
-        Project/MSNew/Components/MSTriangleRenderer.cpp
-        Project/MSNew/Components/MSTriangleRenderer.h
-        Project/MSNew/Components/MSTrianglePhysics.cpp
-        Project/MSNew/Components/MSTrianglePhysics.h
 )
 
 add_subdirectory(Engine)
