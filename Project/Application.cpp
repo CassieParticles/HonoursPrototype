@@ -17,6 +17,13 @@ Application::Application()
          0.4f, 0.8f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f
     };
 
+    VoxelGrid grid{data,8,8};
+    VoxelGrid* subGrid = grid.Separate(0,5,3,3);
+
+    subGrid->PrintValues();
+
+    delete subGrid;
+
 
     MSObject = new MarchingSquaresObject(data,8,8, true);
 

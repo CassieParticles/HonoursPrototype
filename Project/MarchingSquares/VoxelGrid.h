@@ -11,6 +11,8 @@ public:
 
     float *GetData() const;
 
+    VoxelGrid* Separate(int x, int y, int width, int height);
+
     //Read values from the grid
     float getVoxel(int x, int y) const;
     float& operator[](int index) const;

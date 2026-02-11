@@ -17,6 +17,21 @@ VoxelGrid::~VoxelGrid()
     delete[] voxelGrid;
 }
 
+VoxelGrid* VoxelGrid::Separate(int x, int y, int width, int height)
+{
+    VoxelGrid* newGrid = new VoxelGrid();
+
+    newGrid->width = width;
+    newGrid->height = height;
+    newGrid->voxelGrid = new float[width * height];
+
+    for(int row = 0; row < height; row++)
+    {
+        std::copy_n(voxelGrid + (row + y) * this->width + x, width, newGrid->voxelGrid + row * width);
+    }
+
+    return newGrid;
+}
 
 float *VoxelGrid::GetData() const {return voxelGrid;}
 float VoxelGrid::getVoxel(int x, int y) const {return voxelGrid[y * width + x];}
