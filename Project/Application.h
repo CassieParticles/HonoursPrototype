@@ -19,6 +19,8 @@ protected:
 
 
     StaticPhysicsFloor floorObj;
+    StaticPhysicsFloor wallAObj;
+    StaticPhysicsFloor wallBObj;
     DynamicPhysicsBox boxObj;
 
     void Input() override;

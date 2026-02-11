@@ -18,13 +18,22 @@ Application::Application()
     };
 
 
-    MSObject = new MarchingSquaresObject(data,8,8);
+    MSObject = new MarchingSquaresObject(data,8,8, true);
 
+    //Create box for testing
     floorObj.GetTransform().SetPosition(-1,10);
     floorObj.GetTransform().SetRotation(sf::degrees(10));
-    floorObj.GetTransform().SetScale(10,1);
+    floorObj.GetTransform().SetScale(20,1);
+
+    wallAObj.GetTransform().SetPosition(-10,0);
+    wallAObj.GetTransform().SetScale(1,20);
+
+    wallBObj.GetTransform().SetPosition( 10,0);
+    wallBObj.GetTransform().SetScale(1,20);
 
     floorObj.Init();
+    wallAObj.Init();
+    wallBObj.Init();
 
     boxObj.GetTransform().SetPosition(5,-2);
     boxObj.Init();
@@ -40,6 +49,8 @@ void Application::Input()
 void Application::Update()
 {
     boxObj.Update();
+    wallAObj.Update();
+    wallBObj.Update();
     MSObject->Update();
 }
 
@@ -49,5 +60,7 @@ void Application::Render()
     MSObject->Render(&window);
 
     floorObj.Render(&window);
+    wallAObj.Render(&window);
+    wallBObj.Render(&window);
     boxObj.Render(&window);
 }
