@@ -10,10 +10,10 @@
 class MarchingSquaresObject : public GameObject
 {
 public:
-    MarchingSquaresObject(float* data, int width, int height);
+    MarchingSquaresObject(float* data, int width, int height, bool dynamic = false);
     void Render(sf::RenderWindow* window) override;//Overwrite with new array//Overwrite with new array
 private:
-    void Generate();
+    void Generate(bool dynamic = false);
 
     VoxelGrid voxelGrid;
     std::vector<Triangle> triangles;

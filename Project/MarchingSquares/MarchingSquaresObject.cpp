@@ -2,13 +2,13 @@
 
 #include "Triangle.h"
 
-MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height):voxelGrid(data,width,height), renderable(&transform), physics(&transform)
+MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height, bool dynamic):voxelGrid(data,width,height), renderable(&transform), physics(&transform)
 {
     //Voxel grid needs -ve values on it's edges
     voxelGrid.AddBorder(-1.0f);
     voxelGrid.PrintValues();
 
-    Generate();
+    Generate(dynamic);
 }
 
 void MarchingSquaresObject::Render(sf::RenderWindow* window)
@@ -16,14 +16,14 @@ void MarchingSquaresObject::Render(sf::RenderWindow* window)
     renderable.Render(window);
 }
 
-void MarchingSquaresObject::Generate()
+void MarchingSquaresObject::Generate(bool dynamic)
 {
     int width = voxelGrid.getWidth();
     int height = voxelGrid.getHeight();
 
     MarchingSquaresRenderable::MSRenderableBuilder graphicsBuilder = renderable.GetBuilder();
     MarchingSquaresPhysics::MSPhysicsBuilder physicsBuilder = physics.GetBuilder();
-    physicsBuilder.SetDynamic(false);
+    physicsBuilder.SetDynamic(dynamic);
 
     triangles.clear();
     for(int y=0;y<height - 1; ++y)
