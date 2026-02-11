@@ -17,10 +17,21 @@ Application::Application()
          0.4f, 0.8f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f
     };
 
+    VoxelGrid* voxelGridOriginal = new VoxelGrid(data,8,8);
+    voxelGridOriginal->AddBorder(-1);
+    voxelGridOriginal->PrintValues();
+    std::cout<<"======================================\n";
+    std::vector<VoxelGrid*> newGrids = voxelGridOriginal->GetSubgrids();
+    for(auto* grid:newGrids)
+    {
+        grid->PrintValues();
+        std::cout<<"======================================\n";
+    }
+
 
     MarchingSquaresObject* obj = new MarchingSquaresObject();
-    obj->SetGrid(data,8,8);
     obj->SetDynamic(true);
+    obj->SetGrid(data,8,8);
     obj->Init();
     MSObjects.push_back(obj);
 

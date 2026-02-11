@@ -1,6 +1,9 @@
 ﻿#include "VoxelGrid.h"
 
 #include <iostream>
+#include <stack>
+#include <SFML/Graphics.hpp>
+
 VoxelGrid::VoxelGrid(): width(0),height(0) {}
 
 VoxelGrid::VoxelGrid(float* data, int width, int height, int x, int y): width(width), height(height), x(x), y(y)
@@ -31,6 +34,87 @@ VoxelGrid* VoxelGrid::Separate(int x, int y, int width, int height)
     }
 
     return newGrid;
+}
+
+std::vector<VoxelGrid*> VoxelGrid::GetSubgrids()
+{
+    std::vector<VoxelGrid*> subgrids;
+    //Create copy of the grid to check(this may be expensive)
+    //Iterate through grid until +ve value reached
+    //-Add position to "check list"
+    //-Iterate through neighbors, adding +ve to checklist (set them to -1 to prevent rechecking)
+    //-Keep track of upper/lower bounds of x & y
+    //-Once "check list" is empty, create subgrid using bounds, and add it to subgrids vector
+
+    //Copy grid, this will be destroyed during operation
+    float* gridCopy = new float[width * height];
+    std::copy(voxelGrid,voxelGrid + width * height,gridCopy);
+
+    for(int x=0;x<width;x++)
+    {
+        for(int y=0;y<height;y++)
+        {
+            //Skip values less than 0
+            if(gridCopy[x * width + y] < 0){continue;}
+            subgrids.push_back(CreateSubgrid(x,y, gridCopy));
+        }
+    }
+
+    delete[] gridCopy;
+
+    return subgrids;
+}
+
+VoxelGrid* VoxelGrid::CreateSubgrid(int x, int y, float* gridCopy)
+{
+    std::stack<sf::Vector2i> checkList;
+    sf::Vector2i lowerBound{x,y};
+    sf::Vector2i upperBound{x,y};
+
+    //Corners (for easier iteration)
+    constexpr sf::Vector2i neighbors[8]
+    {
+      { 1, 0},
+      { 1, 1},
+      { 0, 1},
+      {-1, 1},
+      {-1, 0},
+      {-1,-1},
+      { 0,-1},
+      { 1,-1}
+    };
+
+    checkList.push({x,y});
+    while(checkList.size() > 0)
+    {
+        //Get checked position(compare against bounds)
+        sf::Vector2i current = checkList.top();
+        checkList.pop();
+
+        lowerBound.x = std::min(lowerBound.x,current.x);
+        lowerBound.y = std::min(lowerBound.y,current.y);
+
+        upperBound.x = std::max(upperBound.x,current.x);
+        upperBound.y = std::max(upperBound.y,current.y);
+
+        //Check neighbors
+        for(int i=0;i<8;++i)
+        {
+            sf::Vector2i neighbor = current + neighbors[i];
+            //Bounds checking(should never occur if boundary is set up properly)
+            if(neighbor.x < 0 || neighbor.x >= width || neighbor.y < 0 || neighbor.y >= height){continue;}
+            //Add +ve neighbors to checklist
+            if(gridCopy[neighbor.y * width + neighbor.x] > 0)
+            {
+                checkList.push(neighbor);
+            }
+        }
+        //Set checked value to -1 so it's not checked again
+        gridCopy[current.y * width + current.x] = -1;
+    }
+
+    sf::Vector2i size = upperBound - lowerBound;
+    return Separate(lowerBound.x - 1,lowerBound.y - 1, size.x + 3, size.y + 3);
 }
 
 float *VoxelGrid::GetData() const {return voxelGrid;}
@@ -106,7 +190,7 @@ void VoxelGrid::AddRowTop(float defaultValue)
     //Copy old data into array (offset by width)
     std::copy(voxelGrid,voxelGrid + (width * height), newArr + width);
 
-    //Set default valuein new space
+    //Set default value in new space
     for(int i=0;i<width;++i)
     {
         newArr[i] = defaultValue;

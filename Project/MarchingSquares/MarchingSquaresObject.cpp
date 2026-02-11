@@ -36,6 +36,8 @@ void MarchingSquaresObject::Init()
     Generate(isDynamic);
 }
 
+
+
 void MarchingSquaresObject::Update()
 {
     physics.Update();
@@ -44,6 +46,23 @@ void MarchingSquaresObject::Update()
 void MarchingSquaresObject::Render(sf::RenderWindow* window)
 {
     renderable.Render(window);
+}
+
+std::vector<MarchingSquaresObject*> MarchingSquaresObject::Separate()
+{
+    ///Separate grid into several subgrids
+    std::vector<VoxelGrid*> subgrids;
+    //Iterate through grid until +ve value reached
+    //Add itself to "check list"
+
+    ///Pass first subgrid into this object (delete old grid)
+
+    ///Create new marching squares objects and give them the other subgrids
+
+    ///Create and initialize subgrids (they won't need to return anything)
+
+    ///Return vector of data
+    return std::vector<MarchingSquaresObject*>();
 }
 
 void MarchingSquaresObject::Generate(bool dynamic)

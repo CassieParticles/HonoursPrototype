@@ -12,6 +12,8 @@ public:
     float *GetData() const;
 
     VoxelGrid* Separate(int x, int y, int width, int height);
+    std::vector<VoxelGrid*> GetSubgrids();
+
 
     //Read values from the grid
     float getVoxel(int x, int y) const;
@@ -30,6 +32,8 @@ private:
     void AddColumnRight(float defaultValue = 0.0f);
     void AddRowTop(float defaultValue = 0.0f);
     void AddRowBottom(float defaultValue = 0.0f);
+
+    VoxelGrid* CreateSubgrid(int x, int y, float* gridCopy);
 
     float* voxelGrid;
 

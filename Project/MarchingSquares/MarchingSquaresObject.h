@@ -17,6 +17,8 @@ public:
     void SetGrid(VoxelGrid* grid);
     void SetDynamic(bool isDynamic);
 
+    std::vector<MarchingSquaresObject*> Separate();
+
     void Init() override;
 
     void Update() override;
