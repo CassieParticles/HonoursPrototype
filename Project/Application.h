@@ -16,6 +16,7 @@ public:
 protected:
     TestObject testObject;
     MarchingSquaresObject* MSObject;
+    std::vector<MarchingSquaresObject*> MSObjects;
 
 
     StaticPhysicsFloor floorObj;

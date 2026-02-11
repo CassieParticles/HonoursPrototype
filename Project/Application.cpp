@@ -24,8 +24,7 @@ Application::Application()
 
     delete subGrid;
 
-
-    MSObject = new MarchingSquaresObject(data,8,8, true);
+    MSObjects.push_back(new MarchingSquaresObject(data,8,8, true));
 
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,10);
@@ -58,13 +57,19 @@ void Application::Update()
     boxObj.Update();
     wallAObj.Update();
     wallBObj.Update();
-    MSObject->Update();
+
+    for(auto* obj : MSObjects)
+    {
+        obj->Update();
+    }
 }
 
 void Application::Render()
 {
-    //testObject.Render(&window);
-    MSObject->Render(&window);
+    for(auto* obj : MSObjects)
+    {
+        obj->Render(&window);
+    }
 
     floorObj.Render(&window);
     wallAObj.Render(&window);
