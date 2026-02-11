@@ -10,7 +10,14 @@
 class MarchingSquaresObject : public GameObject
 {
 public:
-    MarchingSquaresObject(float* data, int width, int height, bool dynamic = false);
+    MarchingSquaresObject();
+    ~MarchingSquaresObject();
+
+    void SetGrid(float* data, int width, int height);
+    void SetGrid(VoxelGrid* grid);
+    void SetDynamic(bool isDynamic);
+
+    void Init() override;
 
     void Update() override;
 
@@ -18,8 +25,9 @@ public:
 private:
     void Generate(bool dynamic = false);
 
-    VoxelGrid voxelGrid;
+    VoxelGrid* voxelGrid;
     std::vector<Triangle> triangles;
+    bool isDynamic;
 
     MarchingSquaresRenderable renderable;
     MarchingSquaresPhysics physics;

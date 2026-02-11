@@ -17,14 +17,12 @@ Application::Application()
          0.4f, 0.8f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f
     };
 
-    VoxelGrid grid{data,8,8};
-    VoxelGrid* subGrid = grid.Separate(0,5,3,3);
 
-    subGrid->PrintValues();
-
-    delete subGrid;
-
-    MSObjects.push_back(new MarchingSquaresObject(data,8,8, true));
+    MarchingSquaresObject* obj = new MarchingSquaresObject();
+    obj->SetGrid(data,8,8);
+    obj->SetDynamic(true);
+    obj->Init();
+    MSObjects.push_back(obj);
 
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,10);
@@ -45,7 +43,13 @@ Application::Application()
     boxObj.Init();
 }
 
-Application::~Application() {}
+Application::~Application()
+{
+    for(auto* obj : MSObjects)
+    {
+        delete obj;
+    }
+}
 
 void Application::Input()
 {
@@ -76,3 +80,4 @@ void Application::Render()
     wallBObj.Render(&window);
     boxObj.Render(&window);
 }
+

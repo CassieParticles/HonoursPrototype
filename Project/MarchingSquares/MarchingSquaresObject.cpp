@@ -1,14 +1,39 @@
 ﻿#include "../MarchingSquares/MarchingSquaresObject.h"
 
+#include <iostream>
+
 #include "Triangle.h"
 
-MarchingSquaresObject::MarchingSquaresObject(float* data, int width, int height, bool dynamic):voxelGrid(data,width,height), renderable(&transform), physics(&transform)
+MarchingSquaresObject::MarchingSquaresObject():renderable(&transform), physics(&transform),isDynamic(false),voxelGrid(nullptr)
 {
-    //Voxel grid needs -ve values on it's edges
-    voxelGrid.AddBorder(-1.0f);
-    voxelGrid.PrintValues();
+}
 
-    Generate(dynamic);
+MarchingSquaresObject::~MarchingSquaresObject()
+{
+    delete voxelGrid;
+}
+
+void MarchingSquaresObject::SetGrid(float* data, int width, int height)
+{
+    voxelGrid = new VoxelGrid(data,width,height);
+}
+void MarchingSquaresObject::SetGrid(VoxelGrid* grid)
+{
+    this->voxelGrid = grid;
+}
+void MarchingSquaresObject::SetDynamic(bool isDynamic)
+{
+    this->isDynamic = isDynamic;
+}
+
+void MarchingSquaresObject::Init()
+{
+    if(!voxelGrid)
+    {
+        std::cout<<"ERROR: NO GRID SET\n";
+        return;
+    }
+    Generate(isDynamic);
 }
 
 void MarchingSquaresObject::Update()
@@ -23,8 +48,10 @@ void MarchingSquaresObject::Render(sf::RenderWindow* window)
 
 void MarchingSquaresObject::Generate(bool dynamic)
 {
-    int width = voxelGrid.getWidth();
-    int height = voxelGrid.getHeight();
+    voxelGrid->AddBorder(-1.0f);
+
+    int width = voxelGrid->getWidth();
+    int height = voxelGrid->getHeight();
 
     MarchingSquaresRenderable::MSRenderableBuilder graphicsBuilder = renderable.GetBuilder();
     MarchingSquaresPhysics::MSPhysicsBuilder physicsBuilder = physics.GetBuilder();
@@ -38,10 +65,10 @@ void MarchingSquaresObject::Generate(bool dynamic)
             //Get the values for each of the 4 corners
             float cornerValues[4]
             {
-                voxelGrid.getVoxel(x,y),
-                voxelGrid.getVoxel(x+1,y),
-                voxelGrid.getVoxel(x+1,y+1),
-                voxelGrid.getVoxel(x,y+1)
+                voxelGrid->getVoxel(x,y),
+                voxelGrid->getVoxel(x+1,y),
+                voxelGrid->getVoxel(x+1,y+1),
+                voxelGrid->getVoxel(x,y+1)
             };
 
             //Get which case the cell is
@@ -56,10 +83,10 @@ void MarchingSquaresObject::Generate(bool dynamic)
 
             //Get the vertex position of each corner
             sf::Vector2f vertices[8];
-            vertices[0] = sf::Vector2f(static_cast<float>(x + voxelGrid.getX()), static_cast<float>(y + voxelGrid.getY()) );
-            vertices[2] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid.getX()), static_cast<float>(y + voxelGrid.getY()) );
-            vertices[4] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid.getX()), static_cast<float>(y + 1 + voxelGrid.getY()) );
-            vertices[6] = sf::Vector2f(static_cast<float>(x + voxelGrid.getX()), static_cast<float>(y + 1 + voxelGrid.getY()) );
+            vertices[0] = sf::Vector2f(static_cast<float>(x + voxelGrid->getX()), static_cast<float>(y + voxelGrid->getY()) );
+            vertices[2] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid->getX()), static_cast<float>(y + voxelGrid->getY()) );
+            vertices[4] = sf::Vector2f(static_cast<float>(x + 1 + voxelGrid->getX()), static_cast<float>(y + 1 + voxelGrid->getY()) );
+            vertices[6] = sf::Vector2f(static_cast<float>(x + voxelGrid->getX()), static_cast<float>(y + 1 + voxelGrid->getY()) );
 
             //Calculate the vertex position of each midpoint (lerp between positions)
             vertices[1] = findMidpointX(vertices[0],vertices[2],cornerValues[0],cornerValues[1]);
