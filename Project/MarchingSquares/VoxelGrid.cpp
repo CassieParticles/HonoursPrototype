@@ -57,7 +57,8 @@ std::vector<VoxelGrid*> VoxelGrid::GetSubgrids()
         for(int y=0;y<height;y++)
         {
             //Skip values less than 0
-            if(gridCopy[x * width + y] < 0){continue;}
+            if(gridCopy[y * width + x] < 0){continue;}
+            float val = gridCopy[y * width + x];
             subgrids.push_back(CreateSubgrid(x,y, gridCopy));
         }
     }
