@@ -26,6 +26,8 @@ VoxelGrid* VoxelGrid::Separate(int x, int y, int width, int height)
 
     newGrid->width = width;
     newGrid->height = height;
+    newGrid->x = x + this->x;
+    newGrid->y = y + this->y;
     newGrid->voxelGrid = new float[width * height];
 
     for(int row = 0; row < height; row++)
@@ -68,6 +70,7 @@ std::vector<VoxelGrid*> VoxelGrid::GetSubgrids()
 VoxelGrid* VoxelGrid::CreateSubgrid(int x, int y, float* gridCopy)
 {
     std::stack<sf::Vector2i> checkList;
+    std::stack<sf::Vector2i> points;
     sf::Vector2i lowerBound{x,y};
     sf::Vector2i upperBound{x,y};
 
@@ -90,6 +93,7 @@ VoxelGrid* VoxelGrid::CreateSubgrid(int x, int y, float* gridCopy)
         //Get checked position(compare against bounds)
         sf::Vector2i current = checkList.top();
         checkList.pop();
+        points.push(current);
 
         lowerBound.x = std::min(lowerBound.x,current.x);
         lowerBound.y = std::min(lowerBound.y,current.y);
@@ -114,7 +118,17 @@ VoxelGrid* VoxelGrid::CreateSubgrid(int x, int y, float* gridCopy)
     }
 
     sf::Vector2i size = upperBound - lowerBound;
-    return Separate(lowerBound.x - 1,lowerBound.y - 1, size.x + 3, size.y + 3);
+    VoxelGrid* grid = Separate(lowerBound.x - 1,lowerBound.y - 1, size.x + 3, size.y + 3);
+
+    //Update actual grid to reflect changes
+    while(points.size() > 0)
+    {
+        sf::Vector2i point = points.top();
+        points.pop();
+        voxelGrid[point.y * width + point.x] = -1;
+    }
+
+    return grid;
 }
 
 float *VoxelGrid::GetData() const {return voxelGrid;}

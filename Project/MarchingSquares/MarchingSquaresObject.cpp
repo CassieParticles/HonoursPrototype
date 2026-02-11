@@ -4,7 +4,7 @@
 
 #include "Triangle.h"
 
-MarchingSquaresObject::MarchingSquaresObject():renderable(&transform), physics(&transform),isDynamic(false),voxelGrid(nullptr)
+MarchingSquaresObject::MarchingSquaresObject():voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform)
 {
 }
 
@@ -33,10 +33,9 @@ void MarchingSquaresObject::Init()
         std::cout<<"ERROR: NO GRID SET\n";
         return;
     }
+
     Generate(isDynamic);
 }
-
-
 
 void MarchingSquaresObject::Update()
 {
@@ -50,19 +49,29 @@ void MarchingSquaresObject::Render(sf::RenderWindow* window)
 
 std::vector<MarchingSquaresObject*> MarchingSquaresObject::Separate()
 {
-    ///Separate grid into several subgrids
-    std::vector<VoxelGrid*> subgrids;
-    //Iterate through grid until +ve value reached
-    //Add itself to "check list"
+    std::vector<MarchingSquaresObject*> objects;
+    voxelGrid->AddBorder(-1);
+    std::vector<VoxelGrid*> subgrids = voxelGrid->GetSubgrids();
+    delete voxelGrid;
 
-    ///Pass first subgrid into this object (delete old grid)
+    objects.push_back(this);
+    if(subgrids.size() == 0)
+    {
+        voxelGrid = nullptr;
+        return objects;
+    }
+    voxelGrid = subgrids.at(0);
 
-    ///Create new marching squares objects and give them the other subgrids
+    for(int i=1;i<subgrids.size();i++)
+    {
+        MarchingSquaresObject* newObj = new MarchingSquaresObject();
+        objects.push_back(newObj);
+        newObj->SetGrid(subgrids.at(i));
+        newObj->SetDynamic(isDynamic);
+        //newObj->Init();
+    }
 
-    ///Create and initialize subgrids (they won't need to return anything)
-
-    ///Return vector of data
-    return std::vector<MarchingSquaresObject*>();
+    return objects;
 }
 
 void MarchingSquaresObject::Generate(bool dynamic)

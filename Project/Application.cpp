@@ -7,14 +7,14 @@ Application::Application()
     PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,30.0f))->Build();
 
     float data[64] = {
-         1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,
-         1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,
-         1.0f, 1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f, 1.0f,
-        -1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,-1.0f,
-        -1.0f,-1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,-1.0f,
-        -1.0f,-1.0f,-1.0f,-1.0f, 1.0f, 1.0f,-1.0f,-1.0f,
-        -1.0f,-1.0f,-1.0f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,
-         0.4f, 0.8f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f
+        -1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,-1.0f,
+        -1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,
     };
 
     VoxelGrid* voxelGridOriginal = new VoxelGrid(data,8,8);
@@ -30,10 +30,20 @@ Application::Application()
 
 
     MarchingSquaresObject* obj = new MarchingSquaresObject();
-    obj->SetDynamic(true);
     obj->SetGrid(data,8,8);
-    obj->Init();
-    MSObjects.push_back(obj);
+    obj->SetDynamic(true);
+    std::vector<MarchingSquaresObject*> objs = obj->Separate();
+
+    for(auto* obj:objs)
+    {
+        MSObjects.push_back(obj);
+        obj->Init();
+    }
+
+    // for(auto* obj:MSObjects)
+    // {
+    //     obj->Init();
+    // }
 
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,10);
