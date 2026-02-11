@@ -12,7 +12,12 @@ VoxelGrid::VoxelGrid(float* data, int width, int height, int x, int y): width(wi
     }
 }
 
-VoxelGrid::~VoxelGrid() {}
+VoxelGrid::~VoxelGrid()
+{
+    delete[] voxelGrid;
+}
+
+
 float *VoxelGrid::GetData() const {return voxelGrid;}
 float VoxelGrid::getVoxel(int x, int y) const {return voxelGrid[y * width + x];}
 float& VoxelGrid::operator[](int index) const {return voxelGrid[index];}
