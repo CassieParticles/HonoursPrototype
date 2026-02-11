@@ -17,10 +17,8 @@ Application::Application()
          0.4f, 0.8f, 1.0f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f
     };
 
-    msObject.SetData(data,8,8);
-    msObject.Generate();
 
-    //MSObject = new MarchingSquaresObject(data,8,8);
+    MSObject = new MarchingSquaresObject(data,8,8);
 
     floorObj.GetTransform().SetPosition(-1,10);
     floorObj.GetTransform().SetRotation(sf::degrees(10));
@@ -42,14 +40,13 @@ void Application::Input()
 void Application::Update()
 {
     boxObj.Update();
-    msObject.Update();
+    MSObject->Update();
 }
 
 void Application::Render()
 {
     //testObject.Render(&window);
-    //MSObject->Render(&window);
-    msObject.Render(&window);
+    MSObject->Render(&window);
 
     floorObj.Render(&window);
     boxObj.Render(&window);
