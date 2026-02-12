@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <Core/BaseApplication.h>
 
+#include "GameObjects/CameraController.h"
 #include "GameObjects/DynamicPhysicsBox.h"
 #include "GameObjects/StaticPhysicsFloor.h"
 #include "GameObjects/TestObject.h"
@@ -14,6 +15,8 @@ public:
     ~Application() override;
 
 protected:
+    CameraController controller;
+
     TestObject testObject;
     MarchingSquaresObject* MSObject;
     std::vector<MarchingSquaresObject*> MSObjects;

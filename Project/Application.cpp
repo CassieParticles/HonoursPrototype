@@ -2,35 +2,35 @@
 
 #include <iostream>
 
-Application::Application()
+Application::Application():controller{&camera}
 {
+    //Set up controller
+    controller.SetMoveSpeed(50);
+
     PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,30.0f))->Build();
 
-    float data[64] = {
-        1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,
-        1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,
-        1.0f, 1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f, 1.0f,
-       -1.0f,-1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,-1.0f,
-       -1.0f,-1.0f, 1.0f, 1.0f,-1.0f, 1.0f, 1.0f,-1.0f,
-       -1.0f,-1.0f,-1.0f,-1.0f,-1.0f, 1.0f,-1.0f,-1.0f,
-       -1.0f,-1.0f,-1.0f, 1.0f,-1.0f, 1.0f,-1.0f,-1.0f,
-        0.4f, 0.8f, 1.0f, 1.0f,-1.0f,-1.0f,-1.0f,-1.0f
+    float data[256] = {
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
+         1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f, 1.0f,-0.1f,
+        -0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,-0.1f,
    };
-
-    VoxelGrid* voxelGridOriginal = new VoxelGrid(data,8,8);
-    voxelGridOriginal->AddBorder(-1);
-    voxelGridOriginal->PrintValues();
-    std::cout<<"======================================\n";
-    std::vector<VoxelGrid*> newGrids = voxelGridOriginal->GetSubgrids();
-    for(auto* grid:newGrids)
-    {
-        grid->PrintValues();
-        std::cout<<"======================================\n";
-    }
 
 
     MarchingSquaresObject* obj = new MarchingSquaresObject();
-    obj->SetGrid(data,8,8);
+    obj->SetGrid(data,16,16);
     obj->SetDynamic(true);
     std::vector<MarchingSquaresObject*> objs = obj->Separate();
 
@@ -40,21 +40,16 @@ Application::Application()
         obj->Init();
     }
 
-    // for(auto* obj:MSObjects)
-    // {
-    //     obj->Init();
-    // }
-
     //Create box for testing
-    floorObj.GetTransform().SetPosition(-1,10);
+    floorObj.GetTransform().SetPosition(-1,50);
     floorObj.GetTransform().SetRotation(sf::degrees(10));
-    floorObj.GetTransform().SetScale(20,1);
+    floorObj.GetTransform().SetScale(100,1);
 
-    wallAObj.GetTransform().SetPosition(-10,0);
-    wallAObj.GetTransform().SetScale(1,20);
+    wallAObj.GetTransform().SetPosition(-50,0);
+    wallAObj.GetTransform().SetScale(1,100);
 
-    wallBObj.GetTransform().SetPosition( 10,0);
-    wallBObj.GetTransform().SetScale(1,20);
+    wallBObj.GetTransform().SetPosition( 50,0);
+    wallBObj.GetTransform().SetScale(1,100);
 
     floorObj.Init();
     wallAObj.Init();
@@ -74,11 +69,13 @@ Application::~Application()
 
 void Application::Input()
 {
-
+    controller.TakeInput(&input);
 }
 
 void Application::Update()
 {
+    controller.Update();
+
     boxObj.Update();
     wallAObj.Update();
     wallBObj.Update();
