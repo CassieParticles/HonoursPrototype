@@ -30,16 +30,7 @@ Application::Application():controller{&camera}
    };
 
 
-    MarchingSquaresObject* obj = new MarchingSquaresObject();
-    obj->SetGrid(data,16,16);
-    obj->SetDynamic(true);
-    std::vector<MarchingSquaresObject*> objs = obj->Separate();
-
-    for(auto* obj:objs)
-    {
-        MSObjects.push_back(obj);
-        obj->Init();
-    }
+    MSManager.Add(data,16,16,true);
 
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,50);
@@ -62,10 +53,6 @@ Application::Application():controller{&camera}
 
 Application::~Application()
 {
-    for(auto* obj : MSObjects)
-    {
-        delete obj;
-    }
 }
 
 void Application::Input()
@@ -81,18 +68,12 @@ void Application::Update()
     wallAObj.Update();
     wallBObj.Update();
 
-    for(auto* obj : MSObjects)
-    {
-        obj->Update();
-    }
+    MSManager.Update();
 }
 
 void Application::Render()
 {
-    for(auto* obj : MSObjects)
-    {
-        obj->Render(&window);
-    }
+    MSManager.Render(&window);
 
     floorObj.Render(&window);
     wallAObj.Render(&window);

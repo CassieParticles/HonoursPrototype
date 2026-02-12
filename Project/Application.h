@@ -5,6 +5,7 @@
 #include "GameObjects/DynamicPhysicsBox.h"
 #include "GameObjects/StaticPhysicsFloor.h"
 #include "GameObjects/TestObject.h"
+#include "MarchingSquares/MarchingSquaresManager.h"
 #include "MarchingSquares/MarchingSquaresObject.h"
 
 
@@ -20,7 +21,7 @@ protected:
     TestObject testObject;
     MarchingSquaresObject* MSObject;
     std::vector<MarchingSquaresObject*> MSObjects;
-
+    MarchingSquaresManager MSManager;
 
     StaticPhysicsFloor floorObj;
     StaticPhysicsFloor wallAObj;

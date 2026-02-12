@@ -27,6 +27,8 @@ add_executable(HonoursPrototype main.cpp
         Project/MarchingSquares/TriangleBuilder.h
         Project/GameObjects/CameraController.cpp
         Project/GameObjects/CameraController.h
+        Project/MarchingSquares/MarchingSquaresManager.cpp
+        Project/MarchingSquares/MarchingSquaresManager.h
 )
 
 add_subdirectory(Engine)
