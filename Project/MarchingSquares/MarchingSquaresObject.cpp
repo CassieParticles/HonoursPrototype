@@ -76,6 +76,8 @@ std::vector<MarchingSquaresObject*> MarchingSquaresObject::Separate()
     return objects;
 }
 
+int MarchingSquaresObject::GetTriangleCount() {return triangles.size();}
+
 void MarchingSquaresObject::Generate(bool dynamic)
 {
     voxelGrid->AddBorder(-1.0f);

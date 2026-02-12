@@ -24,9 +24,18 @@ void MarchingSquaresManager::Add(float* data, int width, int height, bool dynami
 
 void MarchingSquaresManager::Update()
 {
-    for(auto* obj:MSObjects)
+    std::vector<MarchingSquaresObject*>::iterator it = MSObjects.begin();
+    while(it!=MSObjects.end())
     {
+        auto* obj = (*it);
+        if(obj->GetTriangleCount()==0)
+        {
+            delete obj;
+            it = MSObjects.erase(it);
+            continue;
+        }
         obj->Update();
+        ++it;
     }
 }
 

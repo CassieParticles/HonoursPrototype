@@ -19,8 +19,9 @@ public:
 
     std::vector<MarchingSquaresObject*> Separate();
 
-    void Init() override;
+    int GetTriangleCount();
 
+    void Init() override;
     void Update() override;
 
     void Render(sf::RenderWindow* window) override;//Overwrite with new array//Overwrite with new array
