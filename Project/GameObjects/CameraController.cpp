@@ -4,8 +4,9 @@
 #include <Core/Timer.h>
 #include <Rendering/Camera.h>
 
-CameraController::CameraController(Camera* camera):GameObject(),camera(camera),moveSpeed(1),translation(),scale(1) {}
+CameraController::CameraController(Camera* camera):GameObject(),camera(camera),moveSpeed(1),scrollSpeed(1),translation(),scale(1) {}
 void CameraController::SetMoveSpeed(float newSpeed) {moveSpeed = newSpeed;}
+void CameraController::SetScrollSpeed(float newSpeed) {scrollSpeed = newSpeed;}
 
 void CameraController::TakeInput(InputHandler* input)
 {
@@ -25,14 +26,22 @@ void CameraController::TakeInput(InputHandler* input)
     {
         translation.x++;
     }
+    if(input->getKey(sf::Keyboard::Key::Hyphen))
+    {
+        scale++;
+    }
+    if(input->getKey(sf::Keyboard::Key::Equal))
+    {
+        scale--;
+    }
 }
 
 void CameraController::Update()
 {
     if(!camera){return;}
     camera->Move(translation * moveSpeed * Timer::getDeltaTime());
-    camera->Zoom(scale);
+    camera->Zoom(1 + scale * scrollSpeed);
 
     translation = sf::Vector2f();
-    scale = 1;
+    scale = 0;
 }

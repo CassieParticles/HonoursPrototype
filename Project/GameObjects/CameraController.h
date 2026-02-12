@@ -10,6 +10,7 @@ public:
     CameraController(Camera* camera);
 
     void SetMoveSpeed(float newSpeed);
+    void SetScrollSpeed(float newSpeed);
 
     void TakeInput(InputHandler* input) override;
 
@@ -17,6 +18,7 @@ public:
 private:
     Camera* camera;
     float moveSpeed;
+    float scrollSpeed;
 
     sf::Vector2f translation;
     float scale;

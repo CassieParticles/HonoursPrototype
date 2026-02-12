@@ -6,6 +6,7 @@ Application::Application():controller{&camera}
 {
     //Set up controller
     controller.SetMoveSpeed(50);
+    controller.SetScrollSpeed(0.001);
 
     PhysicsWorld::CreateWorldBuilder().SetGravity(b2Vec2(0,30.0f))->Build();
 

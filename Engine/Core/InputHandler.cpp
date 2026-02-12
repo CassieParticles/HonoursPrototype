@@ -6,6 +6,7 @@ InputHandler::InputHandler(sf::RenderWindow* window):window{window}
 {
     keys.resize(sf::Keyboard::KeyCount);
     mouseButtons.resize(sf::Mouse::ButtonCount);
+    scroll = 0;
 }
 
 InputHandler::~InputHandler()
@@ -17,7 +18,7 @@ void InputHandler::PollEvents()
 {
     while(const std::optional event = window->pollEvent())
     {
-        float scroll = 0;
+        scroll = 0;
 
         //Close the window
         if(event->is<sf::Event::Closed>())
