@@ -5,6 +5,8 @@
 #include "Transform.h"
 
 
+class InputHandler;
+
 class GameObject
 {
 public:
@@ -15,7 +17,7 @@ public:
 
     virtual void Init() {}
 
-    virtual void TakeInput() {}
+    virtual void TakeInput(InputHandler* input) {}
     virtual void Update() {}
     virtual void Render(sf::RenderWindow* window) {}
 protected:
