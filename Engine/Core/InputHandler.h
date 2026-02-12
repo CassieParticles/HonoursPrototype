@@ -15,6 +15,8 @@ public:
 
     sf::Vector2i getMousePosition(){return mousePosition;};
 
+    float getScroll();
+
 private:
     sf::RenderWindow* window;
 
@@ -23,4 +25,6 @@ private:
 
     std::vector<bool> keys;
     std::vector<bool> mouseButtons;
+
+    float scroll;
 };

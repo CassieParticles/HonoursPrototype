@@ -1,5 +1,7 @@
 ﻿#include "InputHandler.h"
 
+#include <iostream>
+
 InputHandler::InputHandler(sf::RenderWindow* window):window{window}
 {
     keys.resize(sf::Keyboard::KeyCount);
@@ -15,6 +17,8 @@ void InputHandler::PollEvents()
 {
     while(const std::optional event = window->pollEvent())
     {
+        float scroll = 0;
+
         //Close the window
         if(event->is<sf::Event::Closed>())
         {
@@ -56,8 +60,13 @@ void InputHandler::PollEvents()
             int button = static_cast<int>(event->getIf<sf::Event::MouseButtonReleased>()->button);
             mouseButtons.at(button) = false;
         }
+        if(event->is<sf::Event::MouseWheelScrolled>())
+        {
+            scroll = event->getIf<sf::Event::MouseWheelScrolled>()->delta;
+        }
     }
 }
 
 bool InputHandler::getKey(sf::Keyboard::Key key) {return keys[static_cast<int>(key)];}
 bool InputHandler::getMouseButton(sf::Mouse::Button button) {return mouseButtons[static_cast<int>(button)];}
+float InputHandler::getScroll() {return scroll;}
