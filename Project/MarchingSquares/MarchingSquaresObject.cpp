@@ -39,11 +39,13 @@ void MarchingSquaresObject::Init()
 
 void MarchingSquaresObject::Update()
 {
+    if(!voxelGrid){return;}
     physics.Update();
 }
 
 void MarchingSquaresObject::Render(sf::RenderWindow* window)
 {
+    if(!voxelGrid){return;}
     renderable.Render(window);
 }
 
