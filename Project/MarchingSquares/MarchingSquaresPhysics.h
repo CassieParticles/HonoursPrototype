@@ -9,6 +9,7 @@ class MarchingSquaresPhysics
 {
 public:
     MarchingSquaresPhysics(Transform* transform);
+    ~MarchingSquaresPhysics();
 
     class MSPhysicsBuilder: public TriangleBuilder
     {

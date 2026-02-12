@@ -28,7 +28,7 @@ void MarchingSquaresManager::Update()
     while(it!=MSObjects.end())
     {
         auto* obj = (*it);
-        if(obj->GetTriangleCount()==0)
+        if(obj->GetTriangleCount()==4)
         {
             delete obj;
             it = MSObjects.erase(it);

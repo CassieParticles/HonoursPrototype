@@ -9,6 +9,11 @@ MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{t
 
 }
 
+MarchingSquaresPhysics::~MarchingSquaresPhysics()
+{
+    b2DestroyBody(bodyId);
+}
+
 void MarchingSquaresPhysics::MSPhysicsBuilder::SetDynamic(bool isDynamic) {this->isDynamic = isDynamic;}
 
 void MarchingSquaresPhysics::MSPhysicsBuilder::Build()
