@@ -135,20 +135,14 @@ void MarchingSquaresObject::Generate(bool dynamic)
                     vertices[indexSet[i + 2]]
                 };
 
+                if((triangle.A - triangle.B).length() < 0.01f || (triangle.A - triangle.C).length() < 0.01f || (triangle.B - triangle.C).length() < 0.01f)
+                {
+                    std::cout<<"Uh oh!\n";
+                }
 
-                triangles.emplace_back(
-                    vertices[indexSet[i + 0]],
-                    vertices[indexSet[i + 1]],
-                    vertices[indexSet[i + 2]]
-                );
-
-                graphicsBuilder.AddTriangle({vertices[indexSet[i + 0]],
-                    vertices[indexSet[i + 1]],
-                    vertices[indexSet[i + 2]]});
-
-                physicsBuilder.AddTriangle({vertices[indexSet[i + 0]],
-                    vertices[indexSet[i + 1]],
-                    vertices[indexSet[i + 2]]});
+                triangles.push_back(triangle);
+                graphicsBuilder.AddTriangle(triangle);
+                physicsBuilder.AddTriangle(triangle);
             }
         }
     }

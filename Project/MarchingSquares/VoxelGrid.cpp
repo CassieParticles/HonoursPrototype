@@ -208,7 +208,13 @@ void VoxelGrid::AddValueCircle(sf::Vector2f position, float radius, float value)
             if(distanceSqr > 1){continue;}
             float scalar = 1 - distanceSqr;
 
-            voxelGrid[(y + static_cast<int>(position.y) - this->y) * width + (x + static_cast<int>(position.x) - this->x)] += value * scalar;
+            int index = (y + static_cast<int>(position.y) - this->y) * width + (x + static_cast<int>(position.x) - this->x);
+
+            voxelGrid[index] = std::clamp(voxelGrid[index] + value * scalar,-1.0f,1.0f);
+            if(abs(voxelGrid[index]) < 0.05f)
+            {
+                voxelGrid[index] = signbit(voxelGrid[index]) ? -0.05f: 0.05f;
+            }
         }
     }
 }

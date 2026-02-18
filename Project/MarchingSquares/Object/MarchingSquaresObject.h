@@ -56,7 +56,17 @@ private:
         {0,4,2,0,6,4,8,8,8,8,8,8,8}
     };
 
-    inline float normalise(float a, float b, float v) { return (v - a) / (b - a); }
-    inline sf::Vector2f findMidpointX(sf::Vector2f a, sf::Vector2f b, float aVal, float bVal) { return sf::Vector2f(a.x + normalise(aVal, bVal, 0) * (b.x - a.x), a.y); }
-    inline sf::Vector2f findMidpointY(sf::Vector2f a, sf::Vector2f b, float aVal, float bVal) { return sf::Vector2f(a.x, a.y + normalise(aVal, bVal, 0) * (b.y - a.y)); }
+    inline float normalise(float a, float b, float v)
+    {
+        return (v - a) / (b - a);
+    }
+    inline sf::Vector2f findMidpointX(sf::Vector2f a, sf::Vector2f b, float aVal, float bVal)
+    {
+        return sf::Vector2f(a.x + normalise(aVal, bVal, 0) * (b.x - a.x), a.y);
+    }
+
+    inline sf::Vector2f findMidpointY(sf::Vector2f a, sf::Vector2f b, float aVal, float bVal)
+    {
+        return sf::Vector2f(a.x, a.y + normalise(aVal, bVal, 0) * (b.y - a.y));
+    }
 };

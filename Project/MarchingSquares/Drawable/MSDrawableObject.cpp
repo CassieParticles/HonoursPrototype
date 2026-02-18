@@ -23,7 +23,7 @@ void MSDrawableObject::TakeInput(InputHandler* input)
     }
     std::cout<<input->getMousePositionWorld().x<<","<<input->getMousePositionWorld().y<<std::endl;
 
-    grid->AddValueCircle(input->getMousePositionWorld(),2,0.1f);
+    grid->AddValueCircle(input->getMousePositionWorld(),3,1.0f);
 }
 
 void MSDrawableObject::Update()
