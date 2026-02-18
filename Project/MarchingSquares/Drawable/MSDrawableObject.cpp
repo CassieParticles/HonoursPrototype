@@ -6,9 +6,12 @@
 MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition):GameObject(),complete(false)
 {
     transform.SetPosition(mousePosition);
+    grid = new VoxelGrid();
 }
 
-MSDrawableObject::~MSDrawableObject() {}
+MSDrawableObject::~MSDrawableObject()
+{
+}
 
 void MSDrawableObject::TakeInput(InputHandler* input)
 {
@@ -19,6 +22,8 @@ void MSDrawableObject::TakeInput(InputHandler* input)
         return;
     }
     std::cout<<input->getMousePositionWorld().x<<","<<input->getMousePositionWorld().y<<std::endl;
+
+    grid->AddValueCircle(input->getMousePositionWorld(),2,0.1f);
 }
 
 void MSDrawableObject::Update()

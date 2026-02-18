@@ -30,6 +30,20 @@ void MarchingSquaresManager::Add(float* data, int width, int height, bool dynami
     }
 }
 
+void MarchingSquaresManager::Add(VoxelGrid* data, bool dynamic)
+{
+    MarchingSquaresObject* obj = new MarchingSquaresObject();
+    obj->SetGrid(data);
+    obj->SetDynamic(dynamic);
+
+    std::vector<MarchingSquaresObject*> objects = obj->Separate();
+    for(auto* obj:objects)
+    {
+        obj->Init();
+        MSObjects.push_back(obj);
+    }
+}
+
 void MarchingSquaresManager::TakeInput(InputHandler* inputHandler)
 {
     if(inputHandler->getMouseButton(sf::Mouse::Button::Left) && !mousePressed)
@@ -70,6 +84,8 @@ void MarchingSquaresManager::Update()
         auto* obj = (*it);
         if(obj->isComplete())
         {
+            VoxelGrid* grid = obj->getGrid();
+            Add(grid,true);
             delete obj;
             it=MSDrawables.erase(it);
             continue;

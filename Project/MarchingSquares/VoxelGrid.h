@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 class VoxelGrid
 {
@@ -14,7 +15,6 @@ public:
     VoxelGrid* Separate(int x, int y, int width, int height);
     std::vector<VoxelGrid*> GetSubgrids();
 
-
     //Read values from the grid
     float getVoxel(int x, int y) const;
     float& operator[](int index) const;
@@ -27,6 +27,8 @@ public:
 
     void PrintValues();
     void AddBorder(float defaultValue = 0.0f);
+
+    void AddValueCircle(sf::Vector2f position, float radius, float value);
 private:
     void AddColumnLeft(float defaultValue = 0.0f);
     void AddColumnRight(float defaultValue = 0.0f);

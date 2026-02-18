@@ -4,7 +4,10 @@
 #include <stack>
 #include <SFML/Graphics.hpp>
 
-VoxelGrid::VoxelGrid(): width(0),height(0) {}
+VoxelGrid::VoxelGrid(): width(1),height(1),x(0),y(0),voxelGrid(new float[1])
+{
+    voxelGrid[0] = -1.0f;
+}
 
 VoxelGrid::VoxelGrid(float* data, int width, int height, int x, int y): width(width), height(height), x(x), y(y)
 {
@@ -156,6 +159,58 @@ void VoxelGrid::AddBorder(float defaultValue)
     AddColumnRight(defaultValue);
     AddRowTop(defaultValue);
     AddRowBottom(defaultValue);
+}
+
+void VoxelGrid::AddValueCircle(sf::Vector2f position, float radius, float value)
+{
+    //If point is out of bounds, extend the grid
+    sf::Vector2i lowerBound = sf::Vector2i{x,y};
+    sf::Vector2i upperBound = sf::Vector2i{x+width,y+height};
+
+    //Add to the left
+    if(position.x - radius < lowerBound.x)
+    {
+        for(int i=0;i<-(position.x - radius - lowerBound.x);i++)
+        {
+            AddColumnLeft(-1.0f);
+        }
+    }
+    //Add to the right
+    if(position.x + radius > upperBound.x)
+    {
+        for(int i=0;i<position.x + radius - lowerBound.x;i++)
+        {
+            AddColumnRight(-1.0f);
+        }
+    }
+    //Add to the top
+    if(position.y - radius < lowerBound.y)
+    {
+        for(int i=0;i<-(position.y - radius - lowerBound.y);i++)
+        {
+            AddRowTop(-1.0f);
+        }
+    }
+    //Add to the bottom
+    if(position.y +  radius > upperBound.y)
+    {
+        for(int i=0;i<position.y + radius - lowerBound.y;i++)
+        {
+            AddRowBottom(-1.0f);
+        }
+    }
+
+    for(int y=-radius;y<radius;y++)
+    {
+        for(int x=-radius;x<radius;x++)
+        {
+            float distanceSqr = ((x * x) + (y * y)) / (radius * radius);
+            if(distanceSqr > 1){continue;}
+            float scalar = 1 - distanceSqr;
+
+            voxelGrid[(y + static_cast<int>(position.y) - this->y) * width + (x + static_cast<int>(position.x) - this->x)] += value * scalar;
+        }
+    }
 }
 
 void VoxelGrid::AddColumnLeft(float defaultValue)

@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "VoxelGrid.h"
+
 class InputHandler;
 class MarchingSquaresObject;
 class MSDrawableObject;
@@ -14,6 +16,7 @@ public:
     ~MarchingSquaresManager();
 
     void Add(float* data, int width, int height, bool dynamic);
+    void Add(VoxelGrid* data, bool dynamic);
 
     void TakeInput(InputHandler* inputHandler);
     void Update();

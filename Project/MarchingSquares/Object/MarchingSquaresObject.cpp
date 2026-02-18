@@ -129,6 +129,13 @@ void MarchingSquaresObject::Generate(bool dynamic)
             //Assemble triangles from indices using vertices
             for(int i=0;indexSet[i] != 8;i+=3)
             {
+                Triangle triangle = {
+                    vertices[indexSet[i + 0]],
+                    vertices[indexSet[i + 1]],
+                    vertices[indexSet[i + 2]]
+                };
+
+
                 triangles.emplace_back(
                     vertices[indexSet[i + 0]],
                     vertices[indexSet[i + 1]],
