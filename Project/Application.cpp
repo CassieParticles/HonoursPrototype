@@ -58,6 +58,7 @@ Application::~Application()
 void Application::Input()
 {
     controller.TakeInput(&input);
+    MSManager.TakeInput(&input);
 }
 
 void Application::Update()

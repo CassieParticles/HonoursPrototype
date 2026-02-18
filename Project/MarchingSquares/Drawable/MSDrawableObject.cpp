@@ -16,7 +16,9 @@ void MSDrawableObject::TakeInput(InputHandler* input)
     {
         std::cout<<"Mouse button released"<<std::endl;
         complete = true;
+        return;
     }
+    std::cout<<input->getMousePosition().x<<","<<input->getMousePosition().y<<std::endl;
 }
 
 void MSDrawableObject::Update()
