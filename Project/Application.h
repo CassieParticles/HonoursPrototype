@@ -6,7 +6,7 @@
 #include "GameObjects/StaticPhysicsFloor.h"
 #include "GameObjects/TestObject.h"
 #include "MarchingSquares/MarchingSquaresManager.h"
-#include "MarchingSquares/MarchingSquaresObject.h"
+#include "MarchingSquares/Object/MarchingSquaresObject.h"
 
 
 class Application:public BaseApplication

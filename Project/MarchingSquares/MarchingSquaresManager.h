@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "MarchingSquaresObject.h"
+#include "Object/MarchingSquaresObject.h"
 
 class MarchingSquaresManager
 {

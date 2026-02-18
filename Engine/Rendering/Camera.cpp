@@ -2,7 +2,7 @@
 Camera::Camera()
 {
     view.setCenter({0,0});
-    view.zoom(0.06f);
+    view.zoom(0.15f);
 }
 void Camera::Move(sf::Vector2f moveDirection)
 {

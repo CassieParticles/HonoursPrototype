@@ -3,7 +3,7 @@
 
 #include "MarchingSquaresPhysics.h"
 #include "MarchingSquaresRenderable.h"
-#include "VoxelGrid.h"
+#include "../VoxelGrid.h"
 
 
 

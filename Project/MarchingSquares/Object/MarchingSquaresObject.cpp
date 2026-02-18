@@ -1,8 +1,8 @@
-﻿#include "../MarchingSquares/MarchingSquaresObject.h"
+﻿#include "MarchingSquaresObject.h"
 
 #include <iostream>
 
-#include "Triangle.h"
+#include "../Triangle.h"
 
 MarchingSquaresObject::MarchingSquaresObject():voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform)
 {

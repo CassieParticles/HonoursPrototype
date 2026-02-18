@@ -1,6 +1,6 @@
 ﻿#include "MarchingSquaresRenderable.h"
 
-#include "Triangle.h"
+#include "../Triangle.h"
 
 MarchingSquaresRenderable::MarchingSquaresRenderable(Transform* transform):BaseRenderable(transform)
 {

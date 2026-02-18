@@ -3,7 +3,7 @@
 #include <box2d/box2d.h>
 #include <GameObjects/Transform.h>
 
-#include "TriangleBuilder.h"
+#include "../TriangleBuilder.h"
 
 class MarchingSquaresPhysics
 {

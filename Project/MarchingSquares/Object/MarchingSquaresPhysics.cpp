@@ -2,7 +2,7 @@
 
 #include <Physics/PhysicsWorld.h>
 
-#include "Triangle.h"
+#include "../Triangle.h"
 
 MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{transform}
 {

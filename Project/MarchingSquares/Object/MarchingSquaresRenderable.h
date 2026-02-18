@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <Rendering/BaseRenderable.h>
 
-#include "TriangleBuilder.h"
+#include "../TriangleBuilder.h"
 
 class MarchingSquaresRenderable:BaseRenderable
 {

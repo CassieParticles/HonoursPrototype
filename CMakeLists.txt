@@ -10,18 +10,18 @@ add_executable(HonoursPrototype main.cpp
         Project/Application.h
         Project/GameObjects/TestObject.cpp
         Project/GameObjects/TestObject.h
-        Project/MarchingSquares/MarchingSquaresObject.cpp
-        Project/MarchingSquares/MarchingSquaresObject.h
+        Project/MarchingSquares/Object/MarchingSquaresObject.cpp
+        Project/MarchingSquares/Object/MarchingSquaresObject.h
         Project/MarchingSquares/VoxelGrid.cpp
         Project/MarchingSquares/VoxelGrid.h
-        Project/MarchingSquares/MarchingSquaresRenderable.cpp
-        Project/MarchingSquares/MarchingSquaresRenderable.h
+        Project/MarchingSquares/Object/MarchingSquaresRenderable.cpp
+        Project/MarchingSquares/Object/MarchingSquaresRenderable.h
         Project/GameObjects/StaticPhysicsFloor.cpp
         Project/GameObjects/StaticPhysicsFloor.h
         Project/GameObjects/DynamicPhysicsBox.cpp
         Project/GameObjects/DynamicPhysicsBox.h
-        Project/MarchingSquares/MarchingSquaresPhysics.cpp
-        Project/MarchingSquares/MarchingSquaresPhysics.h
+        Project/MarchingSquares/Object/MarchingSquaresPhysics.cpp
+        Project/MarchingSquares/Object/MarchingSquaresPhysics.h
         Project/MarchingSquares/Triangle.h
         Project/MarchingSquares/TriangleBuilder.cpp
         Project/MarchingSquares/TriangleBuilder.h
