@@ -70,4 +70,12 @@ void InputHandler::PollEvents()
 
 bool InputHandler::getKey(sf::Keyboard::Key key) {return keys[static_cast<int>(key)];}
 bool InputHandler::getMouseButton(sf::Mouse::Button button) {return mouseButtons[static_cast<int>(button)];}
+
+sf::Vector2f InputHandler::getMousePositionWorld()
+{
+    return window->mapPixelToCoords(mousePosition);
+}
+
+
 float InputHandler::getScroll() {return scroll;}
+

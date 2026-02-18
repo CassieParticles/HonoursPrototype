@@ -13,7 +13,8 @@ public:
     bool getKey(sf::Keyboard::Key key);
     bool getMouseButton(sf::Mouse::Button button);
 
-    sf::Vector2i getMousePosition(){return mousePosition;};
+    sf::Vector2i getMousePositionScreen(){return mousePosition;};
+    sf::Vector2f getMousePositionWorld();
 
     float getScroll();
 

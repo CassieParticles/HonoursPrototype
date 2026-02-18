@@ -18,7 +18,7 @@ void MSDrawableObject::TakeInput(InputHandler* input)
         complete = true;
         return;
     }
-    std::cout<<input->getMousePosition().x<<","<<input->getMousePosition().y<<std::endl;
+    std::cout<<input->getMousePositionWorld().x<<","<<input->getMousePositionWorld().y<<std::endl;
 }
 
 void MSDrawableObject::Update()
