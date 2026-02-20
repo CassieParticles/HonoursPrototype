@@ -49,7 +49,7 @@ void MarchingSquaresManager::TakeInput(InputHandler* inputHandler)
     if(inputHandler->getMouseButton(sf::Mouse::Button::Left) && !mousePressed)
     {
         //Create new drawable
-        MSDrawableObject* drawable = new MSDrawableObject(sf::Vector2f(0,0));
+        MSDrawableObject* drawable = new MSDrawableObject(sf::Vector2f(0,0),sf::Mouse::Button::Left);
         MSDrawables.push_back(drawable);
         mousePressed = true;
     }

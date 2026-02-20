@@ -3,7 +3,7 @@
 #include <iostream>
 #include <Core/InputHandler.h>
 
-MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition):GameObject(),complete(false)
+MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening):GameObject(),complete(false),buttonListening(buttonListening)
 {
     transform.SetPosition(mousePosition);
     grid = new VoxelGrid();
@@ -15,7 +15,7 @@ MSDrawableObject::~MSDrawableObject()
 
 void MSDrawableObject::TakeInput(InputHandler* input)
 {
-    if(!input->getMouseButton(sf::Mouse::Button::Left))
+    if(!input->getMouseButton(buttonListening))
     {
         std::cout<<"Mouse button released"<<std::endl;
         complete = true;

@@ -7,7 +7,7 @@
 class MSDrawableObject: public GameObject
 {
 public:
-    MSDrawableObject(sf::Vector2f mousePosition);
+    MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening);
     ~MSDrawableObject();
 
     void TakeInput(InputHandler* input) override;
@@ -19,6 +19,7 @@ public:
 
 private:
     VoxelGrid* grid;
+    sf::Mouse::Button buttonListening;
 
     float drawRadius;
 
