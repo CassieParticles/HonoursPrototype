@@ -1,16 +1,20 @@
-﻿#include "MarchingSquaresObject.h"
+#include "MarchingSquaresObject.h"
 
 #include <iostream>
 
 #include "../Triangle.h"
 
-MarchingSquaresObject::MarchingSquaresObject():voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform)
+MarchingSquaresObject::MarchingSquaresObject():voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform),shouldntDestroy(false)
 {
+
 }
 
 MarchingSquaresObject::~MarchingSquaresObject()
 {
-    delete voxelGrid;
+    if(!shouldntDestroy)
+    {
+        delete voxelGrid;
+    }
 }
 
 void MarchingSquaresObject::SetGrid(float* data, int width, int height)
@@ -41,6 +45,18 @@ void MarchingSquaresObject::Update()
 {
     if(!voxelGrid){return;}
     physics.Update();
+}
+
+MSDrawableObject MarchingSquaresObject::MakeDrawable()
+{
+    MSDrawableObject obj{transform.GetPositionSf(),sf::Mouse::Button::Right,voxelGrid};
+
+    //Get the physics object, then mark it as something that shouldn't be cleared up (it's being moved)
+    obj.AddPhysicsStore(physics.getBody());
+    physics.MarkShouldntDestroy();
+    shouldntDestroy = true;
+
+    return obj;
 }
 
 void MarchingSquaresObject::Render(sf::RenderWindow* window)

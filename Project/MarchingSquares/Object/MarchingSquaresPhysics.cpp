@@ -4,14 +4,17 @@
 
 #include "../Triangle.h"
 
-MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{transform}
+MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{transform},shouldntDestroy(false)
 {
 
 }
 
 MarchingSquaresPhysics::~MarchingSquaresPhysics()
 {
-    b2DestroyBody(bodyId);
+    if(!shouldntDestroy)
+    {
+        b2DestroyBody(bodyId);
+    }
 }
 
 void MarchingSquaresPhysics::MSPhysicsBuilder::SetDynamic(bool isDynamic) {this->isDynamic = isDynamic;}

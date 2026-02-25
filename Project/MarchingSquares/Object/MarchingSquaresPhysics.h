@@ -25,6 +25,9 @@ public:
         bool isDynamic;
     };
 
+    void MarkShouldntDestroy(){shouldntDestroy = true;}
+    b2BodyId getBody(){return bodyId;}
+
     MSPhysicsBuilder GetBuilder();
     void Update();
 private:
@@ -33,6 +36,7 @@ private:
     b2BodyId bodyId;
     std::vector<b2ShapeId> shapes;
 
+    bool shouldntDestroy;
 };
 
 

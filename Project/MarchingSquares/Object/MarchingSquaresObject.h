@@ -4,7 +4,7 @@
 #include "MarchingSquaresPhysics.h"
 #include "MarchingSquaresRenderable.h"
 #include "../VoxelGrid.h"
-
+#include "../Drawable/MSDrawableObject.h"
 
 
 class MarchingSquaresObject : public GameObject
@@ -24,6 +24,8 @@ public:
     void Init() override;
     void Update() override;
 
+    MSDrawableObject MakeDrawable();
+
     void Render(sf::RenderWindow* window) override;//Overwrite with new array//Overwrite with new array
 private:
     void Generate(bool dynamic = false);
@@ -31,6 +33,8 @@ private:
     VoxelGrid* voxelGrid;
     std::vector<Triangle> triangles;
     bool isDynamic;
+
+    bool shouldntDestroy;
 
     MarchingSquaresRenderable renderable;
     MarchingSquaresPhysics physics;
