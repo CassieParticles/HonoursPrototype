@@ -1,4 +1,4 @@
-#include "MarchingSquaresObject.h"
+﻿#include "MarchingSquaresObject.h"
 
 #include <iostream>
 
@@ -97,6 +97,19 @@ int MarchingSquaresObject::GetTriangleCount() {return triangles.size();}
 void MarchingSquaresObject::Generate(bool dynamic)
 {
     voxelGrid->AddBorder(-1.0f);
+
+    //Set the voxel grid x and y to 0, simplifies calculating if mouse is over object
+    if(voxelGrid->getX() || voxelGrid->getY())
+    {
+        sf::Vector2f position = transform.GetPositionSf();
+        position.x += voxelGrid->getX();
+        position.y += voxelGrid->getY();
+
+        transform.SetPosition(position);
+
+        voxelGrid->setX(0);
+        voxelGrid->setY(0);
+    }
 
     int width = voxelGrid->getWidth();
     int height = voxelGrid->getHeight();

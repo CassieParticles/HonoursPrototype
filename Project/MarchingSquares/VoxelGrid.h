@@ -25,6 +25,9 @@ public:
     [[nodiscard]]int getX() const { return x; }
     [[nodiscard]]int getY() const { return y; }
 
+    void setX(int x){this->x = x;}
+    void setY(int y){this->y = y;}
+
     void PrintValues();
     void AddBorder(float defaultValue = 0.0f);
 

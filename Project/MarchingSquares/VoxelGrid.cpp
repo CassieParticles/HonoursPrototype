@@ -161,6 +161,8 @@ void VoxelGrid::AddBorder(float defaultValue)
     AddRowBottom(defaultValue);
 }
 
+
+
 void VoxelGrid::AddValueCircle(sf::Vector2f position, float radius, float value)
 {
     //If point is out of bounds, extend the grid
