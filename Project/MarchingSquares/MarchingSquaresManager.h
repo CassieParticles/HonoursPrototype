@@ -25,5 +25,6 @@ private:
     std::vector<MarchingSquaresObject*> MSObjects;
     std::vector<MSDrawableObject*> MSDrawables;
 
-    bool mousePressed;
+    bool mouseLeftPressed;
+    bool mouseRightPressed;
 };

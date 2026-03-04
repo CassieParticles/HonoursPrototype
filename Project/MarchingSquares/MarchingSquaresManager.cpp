@@ -4,7 +4,7 @@
 #include "Object/MarchingSquaresObject.h"
 #include "Drawable/MSDrawableObject.h"
 
-MarchingSquaresManager::MarchingSquaresManager():mousePressed{false}
+MarchingSquaresManager::MarchingSquaresManager():mouseLeftPressed{false}
 {
 
 }
@@ -46,16 +46,16 @@ void MarchingSquaresManager::Add(VoxelGrid* data, bool dynamic)
 
 void MarchingSquaresManager::TakeInput(InputHandler* inputHandler)
 {
-    if(inputHandler->getMouseButton(sf::Mouse::Button::Left) && !mousePressed)
+    if(inputHandler->getMouseButton(sf::Mouse::Button::Left) && !mouseLeftPressed)
     {
         //Create new drawable
         MSDrawableObject* drawable = new MSDrawableObject(sf::Vector2f(0,0),sf::Mouse::Button::Left);
         MSDrawables.push_back(drawable);
-        mousePressed = true;
+        mouseLeftPressed = true;
     }
     else if(!inputHandler->getMouseButton(sf::Mouse::Button::Left))
     {
-        mousePressed = false;
+        mouseLeftPressed = false;
     }
     for(auto* obj : MSDrawables)
     {

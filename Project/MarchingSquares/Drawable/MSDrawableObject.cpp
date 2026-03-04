@@ -39,5 +39,5 @@ void MSDrawableObject::TakeInput(InputHandler* input)
 
 void MSDrawableObject::Update()
 {
-    GameObject::Update();
+
 }
