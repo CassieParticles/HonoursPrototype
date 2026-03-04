@@ -8,8 +8,8 @@
 class MSDrawableObject: public GameObject
 {
 public:
-    MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening);
-    MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening, VoxelGrid* grid);
+    MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening,float value);
+    MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening, VoxelGrid* grid,float value);
     ~MSDrawableObject();
 
     void TakeInput(InputHandler* input) override;
@@ -28,6 +28,7 @@ private:
     b2BodyId physicsStore;
 
     float drawRadius;
+    float value;
 
     bool complete;
 };

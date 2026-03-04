@@ -3,15 +3,17 @@
 #include <iostream>
 #include <Core/InputHandler.h>
 
-MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening):GameObject(),complete(false),buttonListening(buttonListening),physicsStore()
+MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening,float value):GameObject(),complete(false),buttonListening(buttonListening),physicsStore(),value(value)
 {
     transform.SetPosition(mousePosition);
+    drawRadius = 3.0f;
     grid = new VoxelGrid();
 }
 
-MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening, VoxelGrid* grid):GameObject(),complete(false),buttonListening(buttonListening),physicsStore()
+MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button buttonListening, VoxelGrid* grid,float value):GameObject(),complete(false),buttonListening(buttonListening),physicsStore(),value(value)
 {
     transform.SetPosition(mousePosition);
+    drawRadius = 3.0f;
     this->grid = grid;
 }
 
@@ -34,7 +36,7 @@ void MSDrawableObject::TakeInput(InputHandler* input)
     }
     std::cout<<input->getMousePositionWorld().x<<","<<input->getMousePositionWorld().y<<std::endl;
 
-    grid->AddValueCircle(input->getMousePositionWorld(),3,1.0f);
+    grid->AddValueCircle(input->getMousePositionWorld(),drawRadius,value);
 }
 
 void MSDrawableObject::Update()
