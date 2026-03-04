@@ -24,7 +24,7 @@ public:
     void Init() override;
     void Update() override;
 
-    MSDrawableObject MakeDrawable();
+    MSDrawableObject* MakeDrawable();
 
     void Render(sf::RenderWindow* window) override;//Overwrite with new array//Overwrite with new array
 private:

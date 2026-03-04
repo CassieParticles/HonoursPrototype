@@ -47,12 +47,12 @@ void MarchingSquaresObject::Update()
     physics.Update();
 }
 
-MSDrawableObject MarchingSquaresObject::MakeDrawable()
+MSDrawableObject* MarchingSquaresObject::MakeDrawable()
 {
-    MSDrawableObject obj{transform.GetPositionSf(),sf::Mouse::Button::Right,voxelGrid};
+    MSDrawableObject* obj = new MSDrawableObject(transform.GetPositionSf(),sf::Mouse::Button::Right,voxelGrid);
 
     //Get the physics object, then mark it as something that shouldn't be cleared up (it's being moved)
-    obj.AddPhysicsStore(physics.getBody());
+    obj->AddPhysicsStore(physics.getBody());
     physics.MarkShouldntDestroy();
     shouldntDestroy = true;
 
