@@ -3,10 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <box2d/box2d.h>
 
+#include "../../cmake-build-debug-visual-studio-noprofiler/_deps/sfml-src/src/SFML/Audio/AudioDevice.hpp"
+
 class Transform
 {
 public:
     Transform(sf::Vector2f position = sf::Vector2f(), sf::Angle rotation=sf::Angle(), sf::Vector2f scale = sf::Vector2f(1,1));
+
+    Transform *SetData(const Transform& transform);
 
     Transform* SetPosition(sf::Vector2f position);
     Transform* SetPosition(b2Vec2 position);

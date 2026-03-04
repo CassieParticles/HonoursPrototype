@@ -8,6 +8,16 @@ Transform::Transform(sf::Vector2f position, sf::Angle rotation, sf::Vector2f sca
     transformUpdateFlag = false;
 }
 
+Transform *Transform::SetData(const Transform& transform)
+{
+    this->position = transform.position;
+    this->rotation = transform.rotation;
+    this->scale = transform.scale;
+    this->transformUpdateFlag = false;
+
+    return this;
+}
+
 Transform* Transform::SetPosition(sf::Vector2f position)
 {
     this->position = position;

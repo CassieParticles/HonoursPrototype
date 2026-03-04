@@ -14,6 +14,7 @@ public:
     virtual ~GameObject();
 
     Transform& GetTransform(){return transform;}
+    void SetTransform(const Transform& transform){this->transform.SetData(transform);}
 
     virtual void Init() {}
 
