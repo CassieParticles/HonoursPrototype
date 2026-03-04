@@ -11,7 +11,7 @@ MarchingSquaresPhysics::MarchingSquaresPhysics(Transform* transform):transform{t
 
 MarchingSquaresPhysics::~MarchingSquaresPhysics()
 {
-    if(!shouldntDestroy)
+    if(!shouldntDestroy && b2Body_IsValid(bodyId))
     {
         b2DestroyBody(bodyId);
     }

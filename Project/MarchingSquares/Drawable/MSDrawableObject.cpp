@@ -15,6 +15,11 @@ MSDrawableObject::MSDrawableObject(sf::Vector2f mousePosition, sf::Mouse::Button
     transform.SetPosition(mousePosition);
     drawRadius = 3.0f;
     this->grid = grid;
+
+    grid->setX(transform.GetPositionSf().x);
+    grid->setY(transform.GetPositionSf().y);
+
+    transform.SetPosition(sf::Vector2f{0,0});
 }
 
 MSDrawableObject::~MSDrawableObject()
