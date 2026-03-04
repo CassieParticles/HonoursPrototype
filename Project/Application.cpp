@@ -29,14 +29,6 @@ Application::Application():controller{&camera}
          1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
    };
 
-    VoxelGrid* grid = new VoxelGrid();
-    grid->AddValueCircle(sf::Vector2f(4,4),5,2.0f);
-    grid->AddValueCircle(sf::Vector2f(2,0),5,2.0f);
-    grid->AddValueCircle(sf::Vector2f(4,3),5,2.0f);
-    //MSManager.Add(grid,true);
-
-    MSManager.Add(data,16,16,true);
-
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,50);
     floorObj.GetTransform().SetRotation(sf::degrees(00));
