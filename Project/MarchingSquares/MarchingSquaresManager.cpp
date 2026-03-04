@@ -16,11 +16,12 @@ MarchingSquaresManager::~MarchingSquaresManager()
     }
 }
 
-void MarchingSquaresManager::Add(float* data, int width, int height, bool dynamic)
+void MarchingSquaresManager::Add(float* data, int width, int height, bool dynamic, Transform& transform)
 {
     MarchingSquaresObject* obj = new MarchingSquaresObject();
     obj->SetGrid(data,width,height);
     obj->SetDynamic(dynamic);
+    obj->GetTransform().SetData(transform);
 
     std::vector<MarchingSquaresObject*> objects = obj->Separate();
     for(auto* obj:objects)
@@ -30,11 +31,12 @@ void MarchingSquaresManager::Add(float* data, int width, int height, bool dynami
     }
 }
 
-void MarchingSquaresManager::Add(VoxelGrid* data, bool dynamic)
+void MarchingSquaresManager::Add(VoxelGrid* data, bool dynamic, Transform& transform)
 {
     MarchingSquaresObject* obj = new MarchingSquaresObject();
     obj->SetGrid(data);
     obj->SetDynamic(dynamic);
+    obj->GetTransform().SetData(transform);
 
     std::vector<MarchingSquaresObject*> objects = obj->Separate();
     for(auto* obj:objects)
@@ -57,6 +59,23 @@ void MarchingSquaresManager::TakeInput(InputHandler* inputHandler)
     {
         mouseLeftPressed = false;
     }
+    if(inputHandler->getMouseButton(sf::Mouse::Button::Right) && !mouseRightPressed)
+    {
+        for(auto it = MSObjects.begin();it!=MSObjects.end();)
+        {
+            auto* obj = *it;
+            MSDrawables.push_back(obj->MakeDrawable());
+            delete obj;
+            it = MSObjects.erase(it);
+        }
+        mouseRightPressed = true;
+    }
+    else if(!inputHandler->getMouseButton(sf::Mouse::Button::Right))
+    {
+        mouseRightPressed = false;
+    }
+
+
     for(auto* obj : MSDrawables)
     {
         obj->TakeInput(inputHandler);
@@ -85,7 +104,7 @@ void MarchingSquaresManager::Update()
         if(obj->isComplete())
         {
             VoxelGrid* grid = obj->getGrid();
-            Add(grid,true);
+            Add(grid,true, obj->GetTransform());
             delete obj;
             it=MSDrawables.erase(it);
             continue;

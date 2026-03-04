@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <GameObjects/Transform.h>
 #include <SFML/Graphics.hpp>
 
 #include "VoxelGrid.h"
@@ -15,8 +16,8 @@ public:
 
     ~MarchingSquaresManager();
 
-    void Add(float* data, int width, int height, bool dynamic);
-    void Add(VoxelGrid* data, bool dynamic);
+    void Add(float* data, int width, int height, bool dynamic, Transform& transform);
+    void Add(VoxelGrid* data, bool dynamic, Transform& transform);
 
     void TakeInput(InputHandler* inputHandler);
     void Update();
