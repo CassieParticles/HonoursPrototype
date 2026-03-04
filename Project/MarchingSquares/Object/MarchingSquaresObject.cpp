@@ -176,7 +176,6 @@ void MarchingSquaresObject::Generate(bool dynamic)
         }
     }
 
-
     graphicsBuilder.Build();
     physicsBuilder.Build();
 }

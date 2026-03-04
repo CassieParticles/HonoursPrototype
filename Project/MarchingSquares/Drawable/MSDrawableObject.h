@@ -16,7 +16,7 @@ public:
 
     void Update() override;
 
-    void AddPhysicsStore(b2BodyId bodyId){physicsStore = bodyId;}
+    void AddPhysicsStore(b2BodyId bodyId);
 
     bool isComplete() const { return complete; }
     VoxelGrid* getGrid(){return grid;}

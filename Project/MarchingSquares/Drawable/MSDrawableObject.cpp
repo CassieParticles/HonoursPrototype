@@ -35,11 +35,9 @@ void MSDrawableObject::TakeInput(InputHandler* input)
 {
     if(!input->getMouseButton(buttonListening))
     {
-        std::cout<<"Mouse button released"<<std::endl;
         complete = true;
         return;
     }
-    std::cout<<input->getMousePositionWorld().x<<","<<input->getMousePositionWorld().y<<std::endl;
 
     grid->AddValueCircle(input->getMousePositionWorld(),drawRadius,value);
 }
@@ -47,4 +45,10 @@ void MSDrawableObject::TakeInput(InputHandler* input)
 void MSDrawableObject::Update()
 {
 
+}
+
+void MSDrawableObject::AddPhysicsStore(b2BodyId bodyId)
+{
+    this->physicsStore = bodyId;
+    b2Body_SetType(bodyId,b2_staticBody);
 }
