@@ -4,7 +4,8 @@
 
 struct Line
 {
-    Line(sf::Vector2f A = {}, sf::Vector2f B = {}):A(A),B(B) {}
+    Line(sf::Vector2f A, sf::Vector2f B):A(A),B(B) {}
+    Line():A(),B(){}
 
     friend bool operator==(const Line& lhs, const Line& rhs)
     {
