@@ -33,7 +33,68 @@ void MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::Build()
 
     b2ShapeDef shapeDef = b2DefaultShapeDef();
     Line defaultLine = {};
-    int count{};
+
+    //Assemble into groups
+
+
+    //Create group
+    lineGroups.emplace_back();
+    LineGroup& group = lineGroups.at(lineGroups.size()-1);
+
+    //Get initial vertex
+    sf::Vector2i currentCell = getInitialLine();
+    Line* line = lineArray + getIndex(currentCell.x,currentCell.y,0);
+    sf::Vector2f startingVertex = line->A;
+    sf::Vector2f currentVertex = line->B;
+
+    constexpr sf::Vector2i directions[4]
+    {
+        {0,-1},
+        {0,1},
+        {-1,0},
+        {1,0},
+    };
+
+    group.AddVertex(startingVertex);
+    while(currentVertex!=startingVertex)
+    {
+        //Check neighbors for shared vertex
+        Line lines[8];
+
+        //Up
+        lines[0] = lineArray[getIndex(currentCell.x,currentCell.y-1,0)];
+        lines[1] = lineArray[getIndex(currentCell.x,currentCell.y-1,1)];
+        //Down
+        lines[2] = lineArray[getIndex(currentCell.x,currentCell.y+1,0)];
+        lines[3] = lineArray[getIndex(currentCell.x,currentCell.y+1,1)];
+        //Left
+        lines[4] = lineArray[getIndex(currentCell.x-1,currentCell.y,0)];
+        lines[5] = lineArray[getIndex(currentCell.x-1,currentCell.y,1)];
+        //Right
+        lines[6] = lineArray[getIndex(currentCell.x+1,currentCell.y,0)];
+        lines[7] = lineArray[getIndex(currentCell.x+1,currentCell.y,1)];
+
+        for(int i=0;i<8;++i)
+        {
+            //Shared vertex
+            if(lines[i].A == currentVertex)
+            {
+                group.AddVertex(currentVertex);
+                currentVertex = lines[i].B;
+                currentCell+=directions[i / 2];
+                continue;
+            }
+            if(lines[i].B == currentVertex)
+            {
+                group.AddVertex(currentVertex);
+                currentVertex = lines[i].A;
+                currentCell+=directions[i / 2];
+                continue;
+            }
+        }
+    }
+    group.AddVertex(startingVertex);
+
 }
 
 MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::MSPhysicsBuilder(MarchingSquaresPhysicsDecimate* object, int gridWidth, int gridHeight)
@@ -41,6 +102,24 @@ MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::MSPhysicsBuilder(MarchingSquar
 {
     //2 lines per cell
     lineArray = new Line[gridWidth * gridHeight * 2];
+}
+
+sf::Vector2i MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::getInitialLine()
+{
+    Line defaultLine{};
+    for(int y=0;y<gridHeight;y++)
+    {
+        for(int x=0;x<gridWidth;x++)
+        {
+            Line* line = lineArray + getIndex(x,y,0);
+            //Line is something
+            if(*line!=defaultLine)
+            {
+                return {x,y};
+            }
+        }
+    }
+    return {-1,-1};
 }
 
 MarchingSquaresPhysicsDecimate::MSPhysicsBuilder MarchingSquaresPhysicsDecimate::GetBuilder(int gridWidth, int gridHeight)
