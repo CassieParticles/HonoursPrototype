@@ -13,13 +13,13 @@ Application::Application():controller{&camera}
     //Create box for testing
     floorObj.GetTransform().SetPosition(-1,50);
     floorObj.GetTransform().SetRotation(sf::degrees(00));
-    floorObj.GetTransform().SetScale(100,1);
+    floorObj.GetTransform().SetScale(100,10);
 
     wallAObj.GetTransform().SetPosition(-50,0);
-    wallAObj.GetTransform().SetScale(1,100);
+    wallAObj.GetTransform().SetScale(10,100);
 
     wallBObj.GetTransform().SetPosition( 50,0);
-    wallBObj.GetTransform().SetScale(1,100);
+    wallBObj.GetTransform().SetScale(10,100);
 
     floorObj.Init();
     wallAObj.Init();
