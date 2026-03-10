@@ -35,66 +35,76 @@ void MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::Build()
     Line defaultLine = {};
 
     //Assemble into groups
+    int linesAdded{};
 
-
-    //Create group
-    lineGroups.emplace_back();
-    LineGroup& group = lineGroups.at(lineGroups.size()-1);
-
-    //Get initial vertex
-    sf::Vector2i currentCell = getInitialLine();
-    Line* line = lineArray + getIndex(currentCell.x,currentCell.y,0);
-    sf::Vector2f startingVertex = line->A;
-    sf::Vector2f currentVertex = line->B;
-
-    constexpr sf::Vector2i directions[4]
+    while(linesAdded < lineCount)
     {
-        {0,-1},
-        {0,1},
-        {-1,0},
-        {1,0},
-    };
+        //Create group
+        lineGroups.emplace_back();
+        LineGroup& group = lineGroups.at(lineGroups.size()-1);
 
-    group.AddVertex(startingVertex);
-    while(*currentVertex!=startingVertex)
-    {
-        //Check neighbors for shared vertex
-        Line* lines[8];
+        //Get initial vertex
+        sf::Vector2i currentCell = getInitialLine();
+        Line* line = lineArray + getIndex(currentCell.x,currentCell.y,0);
+        sf::Vector2f startingVertex = line->A;
+        sf::Vector2f currentVertex = line->B;
 
-        //Up
-        lines[0] = lineArray + getIndex(currentCell.x,currentCell.y-1,0);
-        lines[1] = lineArray + getIndex(currentCell.x,currentCell.y-1,1);
-        //Down
-        lines[2] = lineArray + getIndex(currentCell.x,currentCell.y+1,0);
-        lines[3] = lineArray + getIndex(currentCell.x,currentCell.y+1,1);
-        //Left
-        lines[4] = lineArray + getIndex(currentCell.x-1,currentCell.y,0);
-        lines[5] = lineArray + getIndex(currentCell.x-1,currentCell.y,1);
-        //Right
-        lines[6] = lineArray + getIndex(currentCell.x+1,currentCell.y,0);
-        lines[7] = lineArray + getIndex(currentCell.x+1,currentCell.y,1);
-
-        for(int i=0;i<8;++i)
+        constexpr sf::Vector2i directions[4]
         {
-            //Shared vertex
-            if(lines[i]->A == currentVertex)
+            {0,-1},
+            {0,1},
+            {-1,0},
+            {1,0},
+        };
+
+        group.AddVertex(startingVertex);
+        while(currentVertex!=startingVertex)
+        {
+            //Check neighbors for shared vertex
+            Line* lines[8];
+
+            //Up
+            lines[0] = lineArray + getIndex(currentCell.x,currentCell.y-1,0);
+            lines[1] = lineArray + getIndex(currentCell.x,currentCell.y-1,1);
+            //Down
+            lines[2] = lineArray + getIndex(currentCell.x,currentCell.y+1,0);
+            lines[3] = lineArray + getIndex(currentCell.x,currentCell.y+1,1);
+            //Left
+            lines[4] = lineArray + getIndex(currentCell.x-1,currentCell.y,0);
+            lines[5] = lineArray + getIndex(currentCell.x-1,currentCell.y,1);
+            //Right
+            lines[6] = lineArray + getIndex(currentCell.x+1,currentCell.y,0);
+            lines[7] = lineArray + getIndex(currentCell.x+1,currentCell.y,1);
+
+            for(int i=0;i<8;++i)
             {
-                group.AddVertex(currentVertex);
-                currentVertex = lines[i]->B;
-                currentCell+=directions[i / 2];
-                break;
-            }
-            else if(lines[i]->B == currentVertex)
-            {
-                group.AddVertex(currentVertex);
-                currentVertex = lines[i]->A;
-                currentCell+=directions[i / 2];
-                break;
+                //Shared vertex
+                if(lines[i]->A == currentVertex)
+                {
+                    group.AddVertex(currentVertex);
+                    currentVertex = lines[i]->B;
+                    *line = {};
+                    line = lines[i];
+                    currentCell+=directions[i / 2];
+                    linesAdded++;
+                    break;
+                }
+                else if(lines[i]->B == currentVertex)
+                {
+                    group.AddVertex(currentVertex);
+                    currentVertex = lines[i]->A;
+                    *line = {};
+                    line = lines[i];
+                    currentCell+=directions[i / 2];
+                    linesAdded++;
+                    break;
+                }
             }
         }
+        *line = {};
+        group.AddVertex(startingVertex);
+        linesAdded++;
     }
-    group.AddVertex(startingVertex);
-
 }
 
 MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::MSPhysicsBuilder(MarchingSquaresPhysicsDecimate* object, int gridWidth, int gridHeight)
