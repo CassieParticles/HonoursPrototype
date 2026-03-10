@@ -176,11 +176,6 @@ void MarchingSquaresObject::Generate(bool dynamic)
                     vertices[indexSet[i + 2]]
                 };
 
-                // if((triangle.A - triangle.B).length() < 0.01f || (triangle.A - triangle.C).length() < 0.01f || (triangle.B - triangle.C).length() < 0.01f)
-                // {
-                //     std::cout<<"Uh oh!\n";
-                // }
-
                 triangles.push_back(triangle);
                 graphicsBuilder.AddTriangle(triangle);
                 physicsBuilder.AddTriangle(triangle);
