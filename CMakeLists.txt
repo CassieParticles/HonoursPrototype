@@ -31,6 +31,8 @@ add_executable(HonoursPrototype main.cpp
         Project/MarchingSquares/MarchingSquaresManager.h
         Project/MarchingSquares/Drawable/MSDrawableObject.cpp
         Project/MarchingSquares/Drawable/MSDrawableObject.h
+        Project/MarchingSquares/Object/MarchingSquaresPhysicsDecimate.cpp
+        Project/MarchingSquares/Object/MarchingSquaresPhysicsDecimate.h
 )
 
 add_subdirectory(Engine)
