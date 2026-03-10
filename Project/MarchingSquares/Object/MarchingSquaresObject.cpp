@@ -4,7 +4,11 @@
 
 #include "../Triangle.h"
 
-MarchingSquaresObject::MarchingSquaresObject():voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform),shouldntDestroy(false)
+MarchingSquaresObject::MarchingSquaresObject()
+    :voxelGrid(nullptr), isDynamic(false),renderable(&transform),physics(&transform),shouldntDestroy(false)
+#ifdef USE_DECIMATE_PHYSICS
+,decimatePhysics(&transform)
+#endif
 {
 
 }
@@ -111,12 +115,17 @@ void MarchingSquaresObject::Generate(bool dynamic)
         voxelGrid->setY(0);
     }
 
+    //Width & height of the voxel grid(not the squares grid)
     int width = voxelGrid->getWidth();
     int height = voxelGrid->getHeight();
 
     MarchingSquaresRenderable::MSRenderableBuilder graphicsBuilder = renderable.GetBuilder();
     MarchingSquaresPhysics::MSPhysicsBuilder physicsBuilder = physics.GetBuilder();
     physicsBuilder.SetDynamic(dynamic);
+
+#ifdef USE_DECIMATE_PHYSICS
+    MarchingSquaresPhysicsDecimate::MSPhysicsBuilder dPhysicsBuilder = decimatePhysics.GetBuilder(width - 1,height - 1);
+#endif
 
     triangles.clear();
     for(int y=0;y<height - 1; ++y)
@@ -141,6 +150,9 @@ void MarchingSquaresObject::Generate(bool dynamic)
 
             //Get the indices of the case
             const int* indexSet = indexTable[index];
+#ifdef USE_DECIMATE_PHYSICS
+            const int* lineIndexSet = edgeIndexTable[index];
+#endif
 
             //Get the vertex position of each corner
             sf::Vector2f vertices[8];
@@ -164,18 +176,34 @@ void MarchingSquaresObject::Generate(bool dynamic)
                     vertices[indexSet[i + 2]]
                 };
 
-                if((triangle.A - triangle.B).length() < 0.01f || (triangle.A - triangle.C).length() < 0.01f || (triangle.B - triangle.C).length() < 0.01f)
-                {
-                    std::cout<<"Uh oh!\n";
-                }
+                // if((triangle.A - triangle.B).length() < 0.01f || (triangle.A - triangle.C).length() < 0.01f || (triangle.B - triangle.C).length() < 0.01f)
+                // {
+                //     std::cout<<"Uh oh!\n";
+                // }
 
                 triangles.push_back(triangle);
                 graphicsBuilder.AddTriangle(triangle);
                 physicsBuilder.AddTriangle(triangle);
             }
+
+            //Assemble lines from indices
+#ifdef USE_DECIMATE_PHYSICS
+            for(int i=0;lineIndexSet[i * 2]!=8;i++)
+            {
+                Line line{
+                    vertices[lineIndexSet[i * 2 + 0]],
+                    vertices[lineIndexSet[i * 2 + 1]]
+                };
+
+                dPhysicsBuilder.AddLine(line,x,y,i);
+            }
+#endif
         }
     }
 
     graphicsBuilder.Build();
     physicsBuilder.Build();
+#ifdef USE_DECIMATE_PHYSICS
+    dPhysicsBuilder.Build();
+#endif
 }

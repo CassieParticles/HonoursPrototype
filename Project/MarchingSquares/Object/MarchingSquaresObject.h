@@ -2,9 +2,13 @@
 #include <GameObjects/GameObject.h>
 
 #include "MarchingSquaresPhysics.h"
+#include "MarchingSquaresPhysicsDecimate.h"
 #include "MarchingSquaresRenderable.h"
 #include "../VoxelGrid.h"
 #include "../Drawable/MSDrawableObject.h"
+
+
+#define USE_DECIMATE_PHYSICS    //Not a great solution, but a quick one that won't affect performance
 
 
 class MarchingSquaresObject : public GameObject
@@ -38,6 +42,9 @@ private:
 
     MarchingSquaresRenderable renderable;
     MarchingSquaresPhysics physics;
+#ifdef USE_DECIMATE_PHYSICS
+    MarchingSquaresPhysicsDecimate decimatePhysics;
+#endif
 
     //Indices of triangles in each case, 8 means no more triangles, CW order, starting at lowest
     constexpr static int indexTable[16][13]
