@@ -56,40 +56,40 @@ void MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::Build()
     };
 
     group.AddVertex(startingVertex);
-    while(currentVertex!=startingVertex)
+    while(*currentVertex!=startingVertex)
     {
         //Check neighbors for shared vertex
-        Line lines[8];
+        Line* lines[8];
 
         //Up
-        lines[0] = lineArray[getIndex(currentCell.x,currentCell.y-1,0)];
-        lines[1] = lineArray[getIndex(currentCell.x,currentCell.y-1,1)];
+        lines[0] = lineArray + getIndex(currentCell.x,currentCell.y-1,0);
+        lines[1] = lineArray + getIndex(currentCell.x,currentCell.y-1,1);
         //Down
-        lines[2] = lineArray[getIndex(currentCell.x,currentCell.y+1,0)];
-        lines[3] = lineArray[getIndex(currentCell.x,currentCell.y+1,1)];
+        lines[2] = lineArray + getIndex(currentCell.x,currentCell.y+1,0);
+        lines[3] = lineArray + getIndex(currentCell.x,currentCell.y+1,1);
         //Left
-        lines[4] = lineArray[getIndex(currentCell.x-1,currentCell.y,0)];
-        lines[5] = lineArray[getIndex(currentCell.x-1,currentCell.y,1)];
+        lines[4] = lineArray + getIndex(currentCell.x-1,currentCell.y,0);
+        lines[5] = lineArray + getIndex(currentCell.x-1,currentCell.y,1);
         //Right
-        lines[6] = lineArray[getIndex(currentCell.x+1,currentCell.y,0)];
-        lines[7] = lineArray[getIndex(currentCell.x+1,currentCell.y,1)];
+        lines[6] = lineArray + getIndex(currentCell.x+1,currentCell.y,0);
+        lines[7] = lineArray + getIndex(currentCell.x+1,currentCell.y,1);
 
         for(int i=0;i<8;++i)
         {
             //Shared vertex
-            if(lines[i].A == currentVertex)
+            if(lines[i]->A == currentVertex)
             {
                 group.AddVertex(currentVertex);
-                currentVertex = lines[i].B;
+                currentVertex = lines[i]->B;
                 currentCell+=directions[i / 2];
-                continue;
+                break;
             }
-            if(lines[i].B == currentVertex)
+            else if(lines[i]->B == currentVertex)
             {
                 group.AddVertex(currentVertex);
-                currentVertex = lines[i].A;
+                currentVertex = lines[i]->A;
                 currentCell+=directions[i / 2];
-                continue;
+                break;
             }
         }
     }
