@@ -104,7 +104,12 @@ void MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::Build()
         *line = {};
         group.AddVertex(startingVertex);
         linesAdded++;
+
+
+        group.DouglasPeucker(0.5f);
     }
+
+
 }
 
 MarchingSquaresPhysicsDecimate::MSPhysicsBuilder::MSPhysicsBuilder(MarchingSquaresPhysicsDecimate* object, int gridWidth, int gridHeight)
